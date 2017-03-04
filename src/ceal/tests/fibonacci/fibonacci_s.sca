@@ -1,0 +1,56 @@
+####################################
+## Fibonacci numbers
+## 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1587 ...
+##########################################################################
+## Concept: Given a database with (encrypted) numbers in range [1, 50],
+## calculate the Fibonacci of the input (encrypted) number.
+##########################################################################
+## Idea: Iterate all the numbers (to avoid side channel attacks) 
+## and keep the result of the requested number.
+##########################################################################
+
+.pragma k=5 r=17 beta=8
+.pragma PQ=239.251
+.pragma io=ts incdir=../lib/
+
+start:
+  .mov21 ptr i
+  .inc ptr
+  .dec db_size
+
+  .seq i input x
+  .smul x fi y
+  .add y result
+
+  .clear fi
+  .add f1 fi
+  .add f2 fi
+  .mov f2 f1
+  .mov fi f2
+
+.ifneq db_size ozero start
+.out result
+.outd result
+.halt
+
+# variables
+. ptr:db_start
+. i:~0 f1:~0 f2:~1 fi:~1 x:~0 y:~0 result:~0
+. ozero:0 
+
+# the Fibonacci number to compute
+input:;.include datax "input.sec"
+
+# data
+db_start:
+.include datax "db.sec"
+db_end:
+db_size: (db_end - db_start)
+
+.include "secure.lib"
+
+# fibonnaci(n):
+# f1 = 0; f2 =1;
+# for (i = 0; i < n; i ++):
+#   fi = f1 + f2; f1 = f2; f2 = fi;
+# print fi
