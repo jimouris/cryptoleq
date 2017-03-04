@@ -1,0 +1,8 @@
+*.tmp
+*.out
+*.txt
+src/unumber/test_gmp/ex1
+src/unumber/test_gmp/ex2
+src/ceal/tests/z_msc*.html
+src/ceal/tests/fails
+src/ceal/_bin_unx/
