@@ -63,11 +63,7 @@ outer:
         .ifneq k c1 inner
         .inc j
         # ptrA -= k
-        .clear tmp
-        label:
-            .dec ptrA
-            .inc tmp
-        .ifneq tmp k label
+        .sub k ptrA
         .mov ptrBbu ptrB
         .add j ptrB
         .inc res
@@ -77,11 +73,7 @@ outer:
     .mov ptrBbu ptrB
     # res += c2 - j;
     .add c2 res
-    .clear tmp
-    label2:
-        .dec res
-        .inc tmp
-    .ifneq tmp j label2
+    .sub j res
 .ifneq i r1 outer
 
 # Print the results

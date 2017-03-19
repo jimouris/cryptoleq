@@ -23,6 +23,15 @@
 .end
 
 
+# # # # # # #
+# sub x y   #
+# y = y - x #
+# # # # # # #
+.def sub x y 
+    x y
+.end
+
+
 # # # # #
 # goto  #
 # # # # #
