@@ -136,9 +136,9 @@ e:
 
 
 # # # # #
-# mov12 #
+# add12 #
 # # # # #
-.def mov12 x y : Z
+.def add12 x y : Z
 .mov y t
         x Z; Z t:0; Z
 .end

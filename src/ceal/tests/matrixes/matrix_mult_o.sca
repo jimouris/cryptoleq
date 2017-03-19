@@ -55,7 +55,7 @@ outer:
             # xy = A[i*c1 + k] * B[k*c2 + j]
             .omul x y xy
             # res[i*c2 + j] += xy
-            .mov12 xy res
+            .add12 xy res
 
             .inc ptrA
             .add c2 ptrB
