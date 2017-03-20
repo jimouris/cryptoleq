@@ -1,0 +1,95 @@
+####################################
+## Intersection between two sorted arrays
+##########################################################################
+## See ./db.opn for input format
+## result: 1, 5, 9, 12, 16, 18, 20, 25
+##########################################################################
+
+
+.pragma k=5 r=17 beta=8
+.pragma PQ=239.251
+.pragma io=ts incdir=../lib/
+
+.mov21 ptr m
+.inc ptr
+.dec db_size
+.mov21 ptr n
+.inc ptr
+.dec db_size
+
+.mov ptr ptrA
+.mov ptr ptrB
+.mov ozero i
+l1:
+    .inc ptrB
+    .inc i
+.ifneq i m l1
+# Now ptrA points to the start of array A, and ptrB to the start of array B.
+
+.mov ptrB ptrBbu
+.mov ozero i
+.mov ozero len
+outer:
+    .mov i j
+    .mov ptrBbu ptrB
+    .add j ptrB
+    inner:
+
+        .mov21 ptrA x
+        .mov21 ptrB y
+
+        .ifneq x y endif
+            .inc len
+            .add12 x res
+            .inc res
+            # .out x
+        endif:
+
+        .inc j
+        .inc ptrB
+    .ifneq j n inner
+    .inc i
+    .inc ptrA
+.ifneq i m outer
+
+# Print the results
+.mov resBu res
+.mov ozero k
+loop:
+    .mov21 res x
+    .out x
+    .inc res
+    .inc k
+.ifneq k len loop
+
+.halt
+
+# variables
+. ptr:db_start
+. res:result
+. resBu:result
+. i:0 j:0 k:0 len:0
+. m:0 n:0 x:0 y:0
+. ptrA:0 ptrB:0 ptrBbu:0
+. ozero:0 oone:1
+
+# data
+db_start:
+.include "db.opn"
+db_end:
+db_size: (db_end - db_start)
+
+.include "secure.lib"
+
+. result:[200]
+
+
+# int* intersectNoBranch1(int arr1[], int arr2[], int m, int n, int*k) {
+#      int *res = calloc(m * n, sizeof(int));
+#      for (int i = 0; i < m ; i++)
+#           for (int j = i ; j < n ; j++)
+#                if (arr1[i] == arr2[j]) {
+#                     res[(*k)++] = arr1[i];
+#                }
+#      return res;
+# }
