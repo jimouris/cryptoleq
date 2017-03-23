@@ -21,10 +21,6 @@
 .mov21 header_ptr c2
 .inc header_ptr
 .dec header_size
-# .out r1
-# .out c1
-# .out r2
-# .out c2
 
 .mov ptr ptrA
 .mov ptr ptrB
@@ -82,7 +78,7 @@ outer:
 .omul r1 c2 iterations
 loop:
     .mov21 res xy
-    .out xy
+    # .out xy
     .outd xy
     .inc res
     .inc i
