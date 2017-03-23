@@ -40,7 +40,7 @@ outer:
 
         .seq x y eq
         .smul x eq tmp
-        .add12 tmp res
+        .mov12 tmp res
         .inc res
 
         .inc j
