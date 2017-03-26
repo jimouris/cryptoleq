@@ -32,7 +32,7 @@ void intersect(int arr1[], int arr2[], int m, int n) {
 /************************************************************
 ** Array intersection without Branches on Encrypted values
 ************************************************************/
-#if 0
+#if 1
 /**
  * For every element in the first array, check every element in the second
  * Return an array of size M*N, where M is the size of the first array, N of the second,
@@ -73,8 +73,9 @@ int* intersectNoBranch(int arr1[], int arr2[], int m, int n) {
 #endif
 
 int main(void) {
-     int arr1[10] = { 1, 5, 9, 10, 12, 13, 16, 18, 20, 25 };
-     int arr2[20] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 16, 17, 18, 19, 20, 21, 22, 23, 25 };
+     // int arr1[10] = { 1, 5, 9, 10, 12, 13, 16, 18, 20, 25 };
+     int arr1[10] = { 1, 1, 2, 2, 2, 3, 3, 3, 3, 3 };
+     int arr2[20] = { 1, 1, 1, 2, 3, 6, 7, 8, 9, 11, 12, 16, 17, 18, 19, 20, 21, 22, 23, 25 };
      int m = 10, n = 20;
 
      intersect(arr1, arr2, m, n);
