@@ -52,7 +52,8 @@
 
 - [ ] __[Tak function](https://en.wikipedia.org/wiki/Tak_(function))__
     * In computer science, the Tak function is a recursive function, named after Ikuo Takeuchi. Tak function is a popular recursion performance test.
-    * 
+   * __Threat Model:__ Probably everything should be encrypted, but it has comparisons with encrypted values..
+   * 
 ``` 
 def tak( x, y, z)
   if y < x
@@ -63,7 +64,6 @@ def tak( x, y, z)
     z
 end
 ```
-    * __Threat Model:__ Probably everything should be encrypted, but it has comparisons with encrypted values..
 
 
 - [ ] __[Permutations](https://en.wikipedia.org/wiki/Permutation)__
