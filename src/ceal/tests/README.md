@@ -32,7 +32,7 @@
     * __Threat Model:__ In this benchmark, we care to protect the contents of the sets. We do not care to protect the size (N) of the biggest set which is given as open value; the smaller array is extended also in size N and filled up with a fixed value.
 
 
-- [ ] __[Insertion-sort](https://en.wikipedia.org/wiki/Insertion_sort)__
+- [x] __[Insertion-sort](https://en.wikipedia.org/wiki/Insertion_sort)__
     * Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time. 
     * Performance:
         - Worst-case: О(n^2)
