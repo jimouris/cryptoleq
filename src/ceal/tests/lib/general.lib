@@ -71,6 +71,19 @@ end:
 .end
 
 
+# # # # # # # #
+# minswpPtrVal#
+# # # # # # # #
+.def minswpPtrVal xptr yptr
+    .mov21 xptr x
+    .mov21 yptr y
+    .minswp y x
+    .mov12 x xptr
+    .mov12 y yptr
+    x:0 y:0;
+.end
+
+
 # # # #
 # inc #
 # # # #
