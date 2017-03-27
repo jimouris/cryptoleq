@@ -1,7 +1,7 @@
 ####################################
 ## Insertion sort ascending order
-## Array:  4  2  5  7  1  0  11  3  9  8
-## Output: 0  1  2  3  4  5  7  8  9  11 
+## Array:  4  2  5  7  1  0  11  3  9  8  4  5  6  1  2  3  7  9  10  2
+## Output: 0  1  1  2  2  2  3  3  4  4  5  5  6  7  7  8  9  9  10  11 
 ##########################################################################
 
 .pragma k=5 r=17 beta=8
@@ -39,7 +39,7 @@ loop:
 . ptr2:db_start
 . ptr_bu:db_start
 . i:0 j:0 x:0 x2:0
-. len:10
+. len:20
 . min:0 max:0
 . ozero:0 oone:1
 
@@ -49,8 +49,6 @@ db_end:
 db_size: (db_end - db_start)
 
 .include "secure.lib"
-
-# . array:[20]
 
 
 # Insertion sort pseudocode

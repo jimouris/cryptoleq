@@ -33,8 +33,8 @@ int main(void) {
 #else
 
 int main(void) {
-    int n = 10, j;
-    int array[10] = { 4, 2, 5, 7, 1, 0, 11, 3, 9, 8 };
+    int n = 20, j;
+    int array[20] = { 4, 2, 5, 7, 1, 0, 11, 3, 9, 8, 4, 5, 6, 1, 2, 3, 7, 9, 10, 2 };
     int *arrayPrev = array;
     int *arrayCur = array;
 
@@ -52,7 +52,7 @@ int main(void) {
     if (i != n) goto outer_loop;
 
     for (i = 0; i < n; i++)
-        printf("%d\t", array[i]);
+        printf("%d  ", array[i]);
     printf("\n");
     return 0;
 }
