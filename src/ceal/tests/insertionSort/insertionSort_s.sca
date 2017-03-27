@@ -1,0 +1,84 @@
+####################################
+## Insertion sort ascending order
+## Array:  4  2  5  7  1  0  11  3  9  8
+## Output: 0  1  2  3  4  5  7  8  9  11 
+##########################################################################
+
+.pragma k=5 r=17 beta=8
+.pragma PQ=239.251
+.pragma io=ts incdir=../lib/
+
+
+.mov oone i                     # i = 1;
+outer_loop:
+    .mov i j                    #   j = i;
+    inner_loop:
+        .mov ptr_bu ptr
+        .add j ptr
+        .mov ptr ptr2
+        .dec ptr2               #        j--;
+# find min and max of ptr, ptr2 using G function
+        .mov21 ptr2 x
+        .mov21 ptr y
+        .mov x x_y
+        .mov y y_x
+        y x_y;
+        ._G x_y x_y gu1
+        ._G x_y x max
+        x y_x;
+        ._G y_x y_x gu2
+        .clear max_tmp
+        ._G y_x y max_tmp
+        .add max_tmp max
+        .mov gu1 diff
+        .add gu2 diff
+        .mov max min
+        diff min;
+        .mov12 min ptr2
+        .mov12 max ptr
+        .dec j                  #       j--;
+    .ifneq j ozero inner_loop   #   if (j != 0) goto inner_loop;
+    .inc i                      #   i++;
+.ifneq i len outer_loop         # if (i != n) goto outer_loop;
+
+
+.mov ptr_bu ptr
+.mov ozero i
+loop:
+    .mov21 ptr x
+    .outd x
+    .inc ptr
+    .inc i
+.ifneq i len loop
+
+.halt
+
+# variables
+. ptr:db_start
+. ptr2:db_start
+. ptr_bu:db_start
+. i:0 j:0 
+. x:~0 x_y:~0 x2:~0
+. y:~0 y1:~0 y_x:~0 diff:~0
+. gu1:~0 gu2:~0 
+. max:~0 max_tmp:~0 min:~0
+. len:10
+. ozero:0 oone:1 sone:~1
+
+db_start:
+.include datax "db.sec"
+db_end:
+db_size: (db_end - db_start)
+
+.include "secure.lib"
+
+
+# Insertion sort pseudocode
+# for (i = 1 ; i < n; i++) {
+#     j = i;
+#     while (j != 0) {
+#         minswp(&array[j-1], &array[j]);
+#         j--;
+#     }
+# }
+# print results

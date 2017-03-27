@@ -71,10 +71,10 @@ end:
 .end
 
 
-# # # # # # # #
-# minswpPtrVal#
-# # # # # # # #
-.def minswpPtrVal xptr yptr
+# # # # # # # # #
+# ominswpPtrVal #
+# # # # # # # # #
+.def ominswpPtrVal xptr yptr
     .mov21 xptr x
     .mov21 yptr y
     .minswp y x
