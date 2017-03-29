@@ -1,8 +1,17 @@
 ####################################
-## Intersection between two sorted arrays
+## Intersection between two arrays
 ##########################################################################
-## See ./db.opn for input format
-## result: 1, 5, 9, 12, 16, 18, 20, 25
+## len(intersection) = min(len(array_1), len(array_2))
+##
+## if the intersected values are less than len(intersection), 
+## the rest will be filled with X (e.g. 999), in order to
+## hide the length of the result .
+##########################################################################
+## array_1 = { 1, 1, 1, 2, 3 }
+## array_2 = { 2, 2, 2, 1, 1, 1, 1, 1, 1, 1 }
+## intersection = { 1 1 1 2 X }
+##########################################################################
+## See ./db.sec for input format
 ##########################################################################
 
 
@@ -11,13 +20,17 @@
 .pragma io=ts incdir=../lib/
 
 
+# Read len(array_1), len(array_2), and compute len(intersection)
 .mov21 header_ptr m
 .inc header_ptr
 .dec header_size
 .mov21 header_ptr n
 .inc header_ptr
 .dec header_size
+.minswp m n
+.mov m minlen
 
+# set pointerB to point in the start of the second array
 .mov ptr ptrA
 .mov ptr ptrB
 .mov ozero i
@@ -29,38 +42,51 @@ l1:
 
 .mov ptrB ptrBbu
 .mov ozero i
-outer:
-    .mov i j
+.mov ozero k
+outer:                      # for (int i = 0; i < m ; i++) {
+    .mov ozero j
     .mov ptrBbu ptrB
-    .add j ptrB
-    inner:
+    inner:                  #   for (int j = 0 ; j < n ; j++) {
 
         .mov21 ptrA x
         .mov21 ptrB y
-
         .seq x y eq
         .smul x eq tmp
-        .mov12 tmp res
-        .inc res
+        .mov12 tmp res      #       res[k] = eq * arr1[i];
+
+# THIS IS LEAKING INFORMATION! should fix it someway...
+        ._decr eq oeq
+        .add oeq res
+        .add oeq k           #       k += eq;
+
+        .smul X eq tmp
+        .add12 tmp ptrB     #       arr2[j] += eq * X;
+        .smul XX eq tmp
+        .add12 tmp ptrA     #       arr1[i] += eq * XX;
 
         .inc j
         .inc ptrB
-    .ifneq j n inner
+    .ifneq j n inner        #   }
     .inc i
     .inc ptrA
-.ifneq i m outer
+.ifneq i m outer            # }
+
+# padding with X's
+padding_loop:               # for ( ; k < minlen ; k++)
+    .mov12 X res            #     res[k] = X;
+    .inc k
+    .inc res
+.ifneq k minlen padding_loop
 
 # Print the results
 .mov resBu res
 .mov ozero k
-.omul m n len
 loop:
     .mov21 res x
     .outd x
-    # .out x
     .inc res
     .inc k
-.ifneq k len loop
+.ifneq k minlen loop
 
 .halt
 
@@ -69,10 +95,13 @@ loop:
 . ptr:db_start
 . res:result
 . resBu:result
-. i:0 j:0 k:0 len:0
-. m:0 n:0 x:~0 y:~0 tmp:~0 eq:~0
+. i:0 j:0 k:0 minlen:0
+. m:0 n:0 
 . ptrA:0 ptrB:0 ptrBbu:0
-. ozero:0
+. ozero:0 oone:1
+. x:~0 y:~0 eq:~0 tmp:~0 oeq:0
+. X:~999 XX:~9999
+
 
 # data
 header_start:
@@ -90,14 +119,20 @@ db_size: (db_end - db_start)
 . result:~[200]
 
 
-# int* intersectNoBranch1(int arr1[], int arr2[], int m, int n) {
-#      int k = 0; 
-#      int *res = calloc(m * n, sizeof(int));
-#      for (int i = 0; i < m ; i++)
-#           for (int j = i ; j < n ; j++) {
-#               int eq = arr1[i] == arr2[j];
-#               int tmp = eq * arr1[i];
-#               res[k++] = arr1[i];
-#           }
-#      return res;
+# int* intersect(int arr1[], int arr2[], int m, int n) {
+#     int k = 0;
+#     int minlen = (m < n) ? m : n;
+#     int *res = malloc(minlen * sizeof(int));
+#     for (int i = 0; i < m ; i++) {
+#         for (int j = 0 ; j < n ; j++) {
+#             int eq = (arr1[i] == arr2[j]) ? 1 : 0;
+#             res[k] = eq * arr1[i];
+#             k += eq;
+#             arr2[j] += eq * X;
+#             arr1[i] += eq * XX;
+#         }
+#     }
+#     for ( ; k < minlen ; k++)
+#         res[k] = X;
+#     return res;
 # }
