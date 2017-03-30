@@ -10,11 +10,16 @@ void sieveOfEratosthenes(int n) {
     for (int i = 0 ; i < n+1 ; i++) 
         prime[i] = 1;
  
-    for (int p = 2 ; p*p < n+1 ; p++)
-        if (prime[p])                               // If prime[p] is not changed, then it is a prime
-            for (int i = 2*p ; i < n+1 ; i += p)    // Update all multiples of p
-                prime[i] = 0;
- 
+    for (int p = 2 ; p*p < n+1 ; p++) {
+        /** This condition "prunes" some iterations, but the algorithm also work without it
+         * In cryptoleq, we cannot have jumps(if/else) over encrypted values; and prime[p] is encrypted.
+         * if (prime[p])                               // If prime[p] is not changed, then it is a prime 
+        **/
+        for (int i = 2*p ; i < n+1 ; i += p) {   // Update all multiples of p
+            prime[i] = 0;
+        }
+    }
+
     for (int p = 2 ; p < n+1 ; p++)                 // Print all prime numbers
         if (prime[p])
             printf("%d ", p);
@@ -37,15 +42,12 @@ void sieveOfEratosthenesLL(int n) {
     int *primeOuter = p_ptr_bu+p;
     int *primeInner;
     outer_loop:
-        x = *primeOuter;
-        if (x != 1) goto skip;
-            i = p; i += p;
-            inner_loop:
-                primeInner = p_ptr_bu + i;
-                *primeInner = 0;
-                i += p;
-            if (i < n+1) goto inner_loop;
-        skip:
+        i = p; i += p;
+        inner_loop:
+            primeInner = p_ptr_bu + i;
+            *primeInner = 0;
+            i += p;
+        if (i < n+1) goto inner_loop;
         primeOuter++;
         p++;
     if (p*p < n+1) goto outer_loop;
@@ -60,7 +62,7 @@ void sieveOfEratosthenesLL(int n) {
 }
 
 int main(void) {
-    int n = 50;
+    int n = 100;
 
     sieveOfEratosthenes(n);
     sieveOfEratosthenesLL(n);

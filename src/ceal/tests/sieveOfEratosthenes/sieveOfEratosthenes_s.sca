@@ -13,7 +13,7 @@
 .add num endNum
 .mov ozero i
 init_loop:
-    .mov12 _o1 primeOuter
+    .mov12 _s1 primeOuter
     .inc primeOuter
     .inc i
 .ifneq i endNum init_loop
@@ -27,7 +27,7 @@ outer_loop:
     inner_loop:                         # Update all multiples of p
         .mov p_ptr_bu primeInner        # prime[i] = 0;
         .add i primeInner
-        .mov12 ozero primeInner
+        .mov12 szero primeInner
         .add p i
     .mov i j
     endNum j inner_loop;                # if (j < endNum) goto inner_loop;
@@ -42,7 +42,8 @@ endNum psqr outer_loop                      # if (psqr < endNum) goto outer_loop
 .add p primeOuter
 print_loop:
     .mov21 primeOuter x
-    .ifneq x _o1 endif
+    ._decr x t
+    .ifneq t _o1 endif
         .out p
     endif:
     .inc primeOuter
@@ -58,14 +59,14 @@ print_loop:
 . p_ptr_bu:prime
 
 . i:0 j:0 p:0 psqr:0
-. x:0
-. ozero:0 otwo:2
+. x:~0
+. ozero:0 otwo:2 szero:~0 t:0
 
 
 .include "secure.lib"
 
 # This array should be at least num+2
-. prime:[300]
+. prime:~[300]
 
 
 # void sieveOfEratosthenes(int n) {
