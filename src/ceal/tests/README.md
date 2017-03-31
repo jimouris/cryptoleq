@@ -16,7 +16,7 @@
     * The only arrangement is that the program can compute up to a maximum/fixed number (N). When the user asks for the fib(X), 0 <= x <= N, the program computes every fib in range [0, N] and prints the fib(X). This arrangement was made in order to protect the data from side channel attacks, like leaking information about X from the computation time.
 
 
-- [ ] __[Factorial](https://en.wikipedia.org/wiki/Factorial)__
+- [x] __[Factorial](https://en.wikipedia.org/wiki/Factorial)__
     * The factorial of a non-negative integer n, denoted by n!, is the product of all positive integers less than or equal to n.
     * __Threat Model:__ Same as Fibonacci.
     
