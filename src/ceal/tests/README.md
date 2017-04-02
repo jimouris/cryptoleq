@@ -27,7 +27,7 @@
     * The matrix product is a ```n × p``` matrix with encrypted values.
 
 
-- [x] __Intersect Sorted Arrays (or [sets](https://www.cs.virginia.edu/~evans/pubs/ndss2012/psi.pdf))__
+- [x] __[Intersect Arrays/Sets](https://www.cs.virginia.edu/~evans/pubs/ndss2012/psi.pdf)__
     * Protocols for private set intersection ([PSI](https://www.cs.virginia.edu/~evans/pubs/ndss2012/psi.pdf)) allow two parties holding sets S and S' to compute the intersection I = S ∩ S' without revealing to the other party any additional information about their respective sets (except their sizes).
     * __Threat Model:__ In this benchmark, we care to protect the contents of the sets. We do not care to protect the size (N) of the biggest set which is given as open value; the smaller array is extended also in size N and filled up with a fixed value.
 
