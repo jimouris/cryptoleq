@@ -13,6 +13,7 @@
 .add num endNum
 .mov ozero i
 init_loop:
+    .add szero _s1
     .mov12 _s1 primeOuter
     .inc primeOuter
     .inc i
@@ -27,6 +28,7 @@ outer_loop:
     inner_loop:                         # Update all multiples of p
         .mov p_ptr_bu primeInner        # prime[i] = 0;
         .add i primeInner
+        .add szero szero
         .mov12 szero primeInner
         .add p i
     .mov i j
@@ -37,18 +39,20 @@ outer_loop:
 endNum psqr outer_loop                      # if (psqr < endNum) goto outer_loop;
 
 # Print all primes from 2 to Num
-.mov otwo p
+.mov stwo pr_s
+.mov otwo i
 .mov p_ptr_bu primeOuter
-.add p primeOuter
-print_loop:
-    .mov21 primeOuter x
-    ._decr x t
-    .ifneq t _o1 endif
-        .out p
-    endif:
+.inc primeOuter
+.inc primeOuter
+print_loop:                         # for (i = 2 ; i < n ; i++)
+    .mov21 primeOuter x             #   print prime[i] * i  // this is either ~0 or ~prime
+    .smul pr_s x tmp                
+    # .out tmp
+    .outd tmp
     .inc primeOuter
-    .inc p
-.ifneq p endNum print_loop
+    .inc i
+    .add _s1 pr_s
+.ifneq i endNum print_loop
 .halt
 
 # variables
@@ -58,9 +62,10 @@ print_loop:
 . primeInner:prime
 . p_ptr_bu:prime
 
-. i:0 j:0 p:0 psqr:0
-. x:~0
-. ozero:0 otwo:2 szero:~0 t:0
+. i:0 j:0 psqr:0 p:0
+. tmp:~0 pr_s:~0
+. x:~0 t:0
+. ozero:0 szero:~0 otwo:2 stwo:~2
 
 
 .include "secure.lib"
@@ -77,7 +82,6 @@ print_loop:
 #         for (int i = 2*p ; i < n+1 ; i += p)    // Update all multiples of p
 #             prime[i] = 0;
 #     for (int p = 2 ; p < n+1 ; p++)             // Print all prime numbers
-#         if (prime[p])
-#             printf("%d ", p);
+#         printf("%d ", p * prime[p]);
 #     printf("\n");
 # }

@@ -41,6 +41,11 @@
     * __Threat Model:__ In this benchmark, we do not care to protect the size of the array. We are protecting the contents of both the input/unsorted and output/sorted arrays.
 
 
+- [x] __[Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)__
+    * In mathematics, the sieve of Eratosthenes, is a simple, ancient algorithm for finding all prime numbers up to any given limit. It does so by iteratively marking as composite (i.e. not prime) the multiples of each prime, starting with the multiples of 2. In this benchmark, we print all prime numbers up to a fixed/maximum number using the sieve of Eratosthenes method.
+    * __Threat Model:__ In this benchmark, the only open value will be the maximum number to compute if it is prime. In order to protect both the primes themselves and the number of primes found from 2 to Num, if a number is prime we print the encryption of that prime, else we print the encryption of zero.
+
+
 - [ ] __[Quick-sort](https://en.wikipedia.org/wiki/Quicksort)__
     * Quicksort is an efficient sorting algorithm, serving as a systematic method for placing the elements of an array in order. 
     * Performance:
@@ -73,12 +78,6 @@ end
 
 - [ ] __[Prime Numbers](https://en.wikipedia.org/wiki/Prime_number)__
     * A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. In this benchmark, we find and print all prime numbers from 2 to a fixed/maximum number N.
-    * __Threat Model:__ In this benchmark, 
-
-
-
-- [ ] __[Sieve of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)__
-    * In mathematics, the sieve of Eratosthenes, is a simple, ancient algorithm for finding all prime numbers up to any given limit. It does so by iteratively marking as composite (i.e. not prime) the multiples of each prime, starting with the multiples of 2. In this benchmark, we print all prime numbers up to a fixed/maximum number using the sieve of Eratosthenes method.
     * __Threat Model:__ In this benchmark, 
 
 

@@ -5,6 +5,8 @@
 ** all entries it as true. A value in prime[i] will
 ** finally be false if i is Not a prime, else true.
 ********************************************************/
+
+#if 1
 void sieveOfEratosthenes(int n) {
     int prime[n+1];
     for (int i = 0 ; i < n+1 ; i++) 
@@ -21,15 +23,15 @@ void sieveOfEratosthenes(int n) {
     }
 
     for (int p = 2 ; p < n+1 ; p++)                 // Print all prime numbers
-        if (prime[p])
-            printf("%d ", p);
+        printf("%d ", p * prime[p]);
     printf("\n");
 }
 
+#else
 /********************************************************
 ** A low level implementation of the above function
 ********************************************************/
-void sieveOfEratosthenesLL(int n) {
+void sieveOfEratosthenes(int n) {
     int prime[n+1];
     int *p_ptr_bu = prime;
     int i = 0;
@@ -54,18 +56,17 @@ void sieveOfEratosthenesLL(int n) {
 
     p = 2;
     print_loop:
-        if (p_ptr_bu[p])
-            printf("%d ", p);
+        printf("%d ", p * p_ptr_bu[p]);
         p++;
     if (p != n+1) goto print_loop;
     printf("\n");
 }
+#endif
 
 int main(void) {
     int n = 100;
 
     sieveOfEratosthenes(n);
-    sieveOfEratosthenesLL(n);
 
     return 0;
 }
