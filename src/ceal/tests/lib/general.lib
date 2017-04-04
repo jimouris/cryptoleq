@@ -58,6 +58,30 @@
 .end
 
 
+# # # #
+# swp #
+# # # #
+.def swp x y
+    .mov x t
+    .mov y x
+    .mov t y
+    t:0;
+.end
+
+
+# # # # # # #
+# swpPtrVal #
+# # # # # # #
+.def swpPtrVal xptr yptr
+    .mov21 xptr x
+    .mov21 yptr y
+    .swp y x
+    .mov12 x xptr
+    .mov12 y yptr
+    x:0 y:0;
+.end
+
+
 # # # # # #
 # minswp  #
 # # # # # #
@@ -121,6 +145,16 @@ end:
 # # # #
 .def out x
         x (-1)
+.end
+
+
+# # # # # # #
+# outPtrVal #
+# # # # # # #
+.def outPtrVal xptr
+    .mov21 xptr x
+    .out x
+    x:0;
 .end
 
 
