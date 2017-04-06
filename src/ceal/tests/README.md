@@ -71,7 +71,7 @@ end
 ```
 
 
-- [ ] __[Permutations](https://en.wikipedia.org/wiki/Permutation)__
+- [x] __[Permutations](https://en.wikipedia.org/wiki/Permutation)__
     * The notion of permutation relates to the act of arranging all the members of a set into some sequence or order, or if the set is already ordered, rearranging its elements, a process called permuting. This benchmark, computes all permutations of a given array/set.
     * __Threat Model:__ In this benchmark, we do not care to protect the size of the array. We are protecting the contents of the input, as well as all the output/permuted arrays.
 
