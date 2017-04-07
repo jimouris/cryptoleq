@@ -46,19 +46,7 @@ else_cond:
         .mov12 y ptr2
 
         # stack variables
-        .mov _o0 j
-        .add stack_ptr stack
-        stack_array_loop:       # push array to stack
-            .mov21 arr tmp
-            .mov12 tmp stack
-            .inc stack
-            .inc arr
-            .inc j
-        .ifneq j size stack_array_loop
-        .mov arr_bu arr
         .mov stack_bu stack
-        .add size stack_ptr
-
         .add stack_ptr stack
         .mov12 l stack          # stack[stack_ptr] = l;
         .inc stack
@@ -82,19 +70,6 @@ recursion_return:
         .dec stack
         .mov21 stack l          # l = stack[stack_ptr-3];
         _o3 stack_ptr;          # stack_ptr -= 3;
-        size stack_ptr;         # stack_ptr -= size;
-        .mov _o0 j              # j = 0;
-
-        .mov arr_bu arr
-        .mov stack_bu stack
-        .add stack_ptr stack
-        unstack_array_loop:     # pop array from the stack
-            .mov21 stack tmp
-            .mov12 tmp arr
-            .inc stack
-            .inc arr
-            .inc j
-        .ifneq j size unstack_array_loop
 
         # swap(array + l, array + i); // swap back
         .mov arr ptr1

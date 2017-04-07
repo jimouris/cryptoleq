@@ -44,7 +44,7 @@ int main(void) {
     int *array = a;
     int *array_bu = a;
     int *ptr1, *ptr2;
-    int size = 3;
+    int size = sizeof(a) / sizeof(*a);
 
     int i, j, rr;
     int l = 0;
@@ -70,18 +70,7 @@ recursion:
             swap(ptr1, ptr2);     // swap
             
             /* stack variables */
-            j = 0;
-            stack += stack_ptr;
-            stack_loop:
-                *stack = *array;
-                stack++;
-                array++;
-                j++;
-            if (j != size) goto stack_loop;
-            array = array_bu;
             stack = stack_bu;
-            stack_ptr += size;
-
             stack += stack_ptr;
             *stack = l;
             stack++;
@@ -105,18 +94,6 @@ recursion_return:
             stack--;
             l = *stack;
             stack_ptr -= 3;
-            stack_ptr -= size;
-            j = 0;
-
-            array = array_bu;
-            stack = stack_bu;
-            stack += stack_ptr;
-            unstack_loop:
-                *array = *stack;
-                stack++;
-                array++;
-                j++;
-            if (j != size) goto unstack_loop;
 
             ptr1 = array + l;
             ptr2 = array + i;
