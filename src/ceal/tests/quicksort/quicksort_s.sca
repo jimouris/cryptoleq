@@ -1,0 +1,199 @@
+####################################
+## Quick Sort
+##########################################################################
+## Sort and print the integer array in db.sec 
+##########################################################################
+## Encrypted: Contents of the array (and the pivot)
+##########################################################################
+
+.pragma k=5 r=17 beta=8
+.pragma PQ=239.251
+.pragma io=ts incdir=../lib/
+
+
+.mov _o0 l
+.mov db_size size
+.mov size r
+.dec r                          # r = size - 1;
+
+.mov12 l stack                  # stack[0] = l;
+.inc stack
+.mov12 r stack                  # stack[1] = r;
+.dec stack
+.add _o2 stack_ptr              # stack_ptr += 2;
+
+while_stack_not_empty:
+    .mov stack_bu stack         # stack = stack_bu;
+    .add stack_ptr stack        # stack += stack_ptr;
+    .dec stack                  # stack--;
+    .mov21 stack r              # r = *stack;
+    .dec stack                  # stack--;
+    .mov21 stack l              # l = *stack;
+    _o2 stack_ptr;              # stack_ptr -= 2;
+    .mov stack_bu stack         # stack = stack_bu;
+
+    #// Partition(arr, l, r);
+    .mov arr ptr1
+    .add l ptr1                 # ptr1 = arr + l;
+    .mov21 ptr1 pivot           # pivot = *ptr1;
+    .mov l i                    # i = l;
+    .mov r p
+    .inc p                      # p = r + 1;
+    while_true:
+        .mov arr ptr1           #     ptr1 = arr;
+        left_loop:
+            .inc i              #         i++;
+            .inc ptr1           #         ptr1++;
+            .mov _o1 cond
+            .mov21 ptr1 tmp
+            .mov pivot pivot_tmp
+
+            tmp pivot_tmp;
+            ._G pivot_tmp _s1 res
+            ._decr res opn_res
+            .ifeq opn_res _o1 if_cond1; # if (*ptr1 - pivot <= 0) goto if_cond1;
+                .mov _o0 cond
+            if_cond1:
+            .mov i tmp
+            r tmp if_cond2;     # if (i - r <= 0) goto if_cond2;
+                .mov _o0 cond
+            if_cond2:
+        .ifneq cond _o0 left_loop
+        .mov arr ptr2
+        .add p ptr2            #     ptr2 = arr + p;        
+        right_loop:
+            .dec p              #         p--; 
+            .dec ptr2           #         ptr2--;
+            .mov21 ptr2 tmp 
+            .mov pivot pivot_tmp
+            .add _s1 pivot_tmp
+            pivot_tmp tmp;
+            ._G tmp _s1 res
+            ._decr res opn_res
+        .ifeq opn_res _o1 right_loop;    # if (pivot + 1 - *ptr2 <= 0) goto right_loop;
+        .mov p tmp
+        i tmp break_loop;       # if (p - i <= 0) goto break_loop;
+        .mov arr ptr1
+        .add i ptr1             #     ptr1 = arr + i;
+        .mov arr ptr2
+        .add p ptr2             #     ptr2 = arr + p;
+        .mov21 ptr1 x
+        .mov21 ptr2 y
+        .mov x t
+        .mov y x
+        .mov t y
+        .mov12 x ptr1
+        .mov12 y ptr2
+    .goto while_true;
+    break_loop:
+    .mov arr ptr1
+    .add l ptr1                 #     ptr1 = arr + l;
+    .mov arr ptr2
+    .add p ptr2                 #     ptr2 = arr + p;
+    .mov21 ptr1 x
+    .mov21 ptr2 y
+    .mov x t
+    .mov y x
+    .mov t y
+    .mov12 x ptr1
+    .mov12 y ptr2
+    #// End of partition
+
+    .mov p tmp
+    .dec tmp
+    l tmp end_left;             #     if (p - 1 - l <= 0) goto end_left;
+        .mov stack_bu stack     #           stack = stack_bu;
+        .add stack_ptr stack    #           stack += stack_ptr;
+        .mov12 l stack          #           *stack = l;
+        .inc stack              #           stack++;
+        .mov p tmp
+        .dec tmp
+        .mov12 tmp stack        #           *stack = p - 1;
+        .add _o2 stack_ptr      #           stack_ptr += 2;
+    end_left:
+
+    .mov r tmp
+    .dec tmp
+    p tmp end_right;            #     if (r - p - 1 <= 0) goto end_right;
+        .mov stack_bu stack     #           stack = stack_bu;
+        .add stack_ptr stack    #           stack += stack_ptr;
+        .mov p tmp
+        .inc tmp
+        .mov12 tmp stack        #           *stack = p + 1;
+        .inc stack              #           stack++;
+        .mov12 r stack          #           *stack = r;
+        .add _o2 stack_ptr      #           stack_ptr += 2;
+    end_right:
+.ifneq stack_ptr _o0 while_stack_not_empty
+
+.mov _o0 i
+.mov arr_bu arr
+print_array_loop:
+    .mov21 arr tmp
+    .outd tmp
+    .inc arr
+    .inc i
+.ifneq i size print_array_loop
+
+.halt
+
+# variables
+. arr:db_start arr_bu:db_start
+. stack:stack_area stack_bu:stack_area
+. ptr1:0 ptr2:0
+. stack_ptr:0 size:0
+
+. i:0 p:0 l:0 r:0  
+. cond:0 pivot:~0 res:~0 opn_res:0
+. tmp:~0 pivot_tmp:~0
+. x:~0 y:~0 t:~0 
+
+. _o0:0 _o2:2
+
+# data
+db_start:
+.include datax "db.sec"
+db_end:
+db_size: (db_end - db_start)
+
+.include "secure.lib"
+
+. stack_area:[256]
+
+# int partition( int arr[], int l, int r) {
+#     int pivot = arr[l];
+#     int i = l;
+#     int j = r + 1;
+#     while (1) {
+#         do ++i; while (arr[i] <= pivot && i <= r);
+#         do --j; while (arr[j] > pivot);
+#         if (i >= j) break;
+#         swap(&arr[i], &arr[j]);
+#     }
+#     swap(&arr[l], &arr[j]);
+#     return j;
+# }
+
+# void quickSortStack(int arr[], int l, int r) {
+#     int stack[r - l + 1];
+#     int stack_ptr = 0;
+#     stack[stack_ptr] = l;
+#     stack[stack_ptr + 1] = r;
+#     stack_ptr += 2;
+#     while (stack_ptr > 0) {                 // while stack not empty
+#         r = stack[stack_ptr - 1];
+#         l = stack[stack_ptr - 2];
+#         stack_ptr -= 2;
+#         int p = partition(arr, l, r);
+#         if (p - 1 > l) {
+#             stack[stack_ptr] = l;
+#             stack[stack_ptr + 1] = p - 1;
+#             stack_ptr += 2;
+#         }
+#         if (p + 1 < r) {
+#             stack[stack_ptr] = p + 1;
+#             stack[stack_ptr + 1] = r;
+#             stack_ptr += 2;
+#         }
+#     }
+# }
