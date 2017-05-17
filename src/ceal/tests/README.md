@@ -5,7 +5,7 @@
 * How the algorithm is converted to privacy preserving version (1 sentence) 
 -->
 
-- [x] Number Occurrences *(not for benchmarking)*
+- [x] __[Number Occurrences](https://github.com/jimouris/cryptoleq/tree/master/src/ceal/tests/numOccurrences)__ *(not for benchmarking)*
     * Given an array of integers count the occurrences of a specific number.
     * __Threat Model:__ The input number as well as the array of integers are given encrypted. No information leaked.
 
