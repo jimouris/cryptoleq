@@ -7,7 +7,7 @@ void swap(int *x, int *y) {
     *y = tmp;
 }
 
-#if 0
+#if 1
 
 void printArray(int *array, int size) {
     for (int i = 0 ; i < size ; i++)
