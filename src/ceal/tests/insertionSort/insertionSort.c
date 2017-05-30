@@ -10,7 +10,11 @@ void minswp(int *x, int *y) {
     }
 }
 
-#if 0
+int gfun(int x, int y) {
+    return (x <= 0) ? 0 : y;
+}
+
+#if 1
 
 int main(void) {
     int n = 10, i, j;
@@ -19,13 +23,22 @@ int main(void) {
     for (i = 1 ; i < n; i++) {
         j = i;
         while (j != 0) {
-            minswp(&array[j-1], &array[j]);
+            int x = array[j-1];
+            int y = array[j];
+
+            int diff = gfun(x-y, x-y) + gfun(y-x, y-x);
+            int max = gfun(x-y, x) + gfun(y-x, y);
+            max += (x == y) * x; // if x == y set max to x
+            int min = max - diff;
+
+            array[j-1] = min;
+            array[j] = max;
             j--;
         }
     }
 
     for (i = 0; i < n; i++)
-        printf("%d\t", array[i]);
+        printf("%d ", array[i]);
     printf("\n");
     return 0;
 }
