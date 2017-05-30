@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdint.h>
+#include <inttypes.h>
 
-#define BOARD_SIZE 7
+#define BOARD_SIZE 4
 int sol_cnt = 0;
 
 int gfun(int x, int y) {
@@ -94,6 +95,12 @@ int main(void) {
     permuteRows(all_sols, array, 0);
     
     decodeSols(all_sols, BOARD_SIZE, sol_cnt);
+    for (int i ; i < BOARD_SIZE ; i++) {
+        for (int j = 0 ; j < BOARD_SIZE ; j++) {
+            printf("%" PRIu64 " ", all_sols[i][j]);
+        }
+        printf("\n");
+    } 
     printf("%d-Queens have %d solutions\n", BOARD_SIZE, sol_cnt);
     return 0;
 }
