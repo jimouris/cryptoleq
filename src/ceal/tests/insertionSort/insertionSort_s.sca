@@ -68,7 +68,7 @@ loop:
 
 # constants
 . len:20
-. _o0:0 _o1:1
+. _o0:0
 
 db_start:
 .include datax "db.sec"
