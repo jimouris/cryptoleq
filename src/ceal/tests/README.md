@@ -61,9 +61,9 @@
     * __Threat Model:__ In this benchmark, we do not care to protect the size of the chessboard. What we care to protect is the contents/positions of the placed queens.
 
 
-- [ ] __Tak function__ [wiki](https://en.wikipedia.org/wiki/Tak_(function))
+- [x] __[Tak function](https://github.com/jimouris/cryptoleq/tree/master/src/ceal/tests/tak_function)__ [wiki](https://en.wikipedia.org/wiki/Tak_(function))
     * In computer science, the Tak function is a recursive function, named after Ikuo Takeuchi. Tak function is a popular recursion performance test.
-    * __Threat Model:__ Probably everything should be encrypted, but it has comparisons with encrypted values..
+    * __Threat Model:__ Every variable is encrypted.
 ``` 
 def tak( x, y, z)
   if y < x
