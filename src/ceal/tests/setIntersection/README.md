@@ -1,4 +1,4 @@
-### Sorted Array Intersection
+### Array Intersection
 Given two arrays of integers ```e.g. 1 1 1 2 3 X X X X X``` and ``` 2 2 2 1 1 1 1 1 1 1``` store and print the intersection of those two arrays ```1  1  1  2  X  X  X  X  X  X```.
 
 **Open values:** The arrays size (given in [header.opn](https://github.com/jimouris/cryptoleq/tree/master/src/ceal/tests/setIntersection/header.opn)). If the sizes of the two arrays are not equal, pad the smaller one with a constant value X (```e.g. 999```).
