@@ -1,2 +1,5 @@
+../../_bin_unx/ceal ../factorial/fact_N512_b16.sca
+../../_bin_unx/ceal ../nqueens/nqueens_perm_s.sca
 ../../_bin_unx/ceal ../factorial/factorial_s.sca
-../../_bin_unx/ceal ../factorial/factorial_s.sca
+../../_bin_unx/ceal ../fibonacci/fibonacci_s.sca
+../../_bin_unx/ceal ../insertionSort/insertionSort_s.sca

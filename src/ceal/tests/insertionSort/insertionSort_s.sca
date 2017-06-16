@@ -71,7 +71,7 @@ loop:
 . _o0:0
 
 db_start:
-.include datax "db.sec"
+.include datax "../insertionSort/db.sec"
 db_end:
 db_size: (db_end - db_start)
 

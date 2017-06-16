@@ -9,9 +9,8 @@
 ##########################################################################
 
 .pragma k=5 r=17 beta=8
-#.pragma k=5 r=17 beta=16  # fact(8)
-#.pragma k=5 r=17 beta=24  # fact(10)
-
+#.pragma k=5 r=17 beta=16
+#.pragma k=5 r=17 beta=24
 
 .pragma PQ=239.251
 #.pragma PQ=63199.64567   
