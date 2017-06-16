@@ -1,0 +1,2 @@
+../../_bin_unx/ceal ../factorial/factorial_s.sca
+../../_bin_unx/ceal ../factorial/factorial_s.sca
