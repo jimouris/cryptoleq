@@ -10,7 +10,7 @@
 #include <unistd.h>
 
 char** parse(FILE* fp) {
-    size_t a_cap = 4;
+    size_t a_cap = 8;
     char** a = malloc(a_cap * sizeof(char*));
     size_t ai_cap = 16;
     char* ai = malloc(ai_cap * sizeof(char));
@@ -59,6 +59,12 @@ char** prepend(char** a, char* ai) {
     a[0] = ai;
 }
 
+void append(char** a, char* ai) {
+    size_t i = 0;
+    while (a[i] != NULL) ++i;
+    a[i] = ai;
+}
+
 int main(int argc, char* argv[]) {
     if (argc != 3) {
         fprintf(stderr, "Usage: %s [command file] [number of CPUs]\n", argv[0]);
@@ -75,6 +81,7 @@ int main(int argc, char* argv[]) {
         fclose(fp);
         return EXIT_FAILURE;
     }
+    char stats_header[] = "IP watch list { _G_start _omul_start _seq_start _smul_start }";
     pid_t* pids = malloc(cpus * sizeof(pid_t));
     int com = 0;
     char** args;
@@ -111,20 +118,35 @@ int main(int argc, char* argv[]) {
                 return EXIT_FAILURE;
             }
             CPU_FREE(set);
-            char file[16];
-            sprintf(file, "out_%d.out", com);
+            char file[256];
+            sprintf(file, "%s_out_%d.out", args[1], com);
             int fd = open(file, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
             if (fd == -1 || dup2(fd, STDOUT_FILENO) == -1 || close(fd) == -1) {
                 fprintf(stderr, "%s: Command %d failed to set output file\n", argv[0], com);
                 return EXIT_FAILURE;
             }
-            sprintf(file, "err_%d.out", com);
+            sprintf(file, "%s_err_%d.out", args[1], com);
             fd = open(file, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
             if (fd == -1 || dup2(fd, STDERR_FILENO) == -1 || close(fd) == -1) {
                 fprintf(stderr, "%s: Command %d failed to set error file\n", argv[0], com);
                 return EXIT_FAILURE;
             }
+            sprintf(file, "%s_stats_%d.out", args[1], com);
+            fd = open(file, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+            if (fd == -1) {
+                fprintf(stderr, "%s: Command %d failed to set stats file\n", argv[0], com);
+                return EXIT_FAILURE;
+            }
+            write(fd, stats_header, sizeof(stats_header));  
+            if (close(fd) == -1) {
+                fprintf(stderr, "%s: Command %d failed to close stats file\n", argv[0], com);
+                return EXIT_FAILURE;
+            }
+
             prepend(args, "time");
+            append(args, "-d");
+            append(args, file);
+
             execvp(args[0], args);
             fprintf(stderr, "%s: Command %d failed to execute\n", argv[0], com);
             return EXIT_FAILURE;
