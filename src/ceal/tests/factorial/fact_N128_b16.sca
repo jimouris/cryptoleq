@@ -27,7 +27,7 @@ fact_loop:
 .outd result
 .halt
 
-. maxnum:50 # the maximum factorial the program can compute
+. maxnum:16 # the maximum factorial the program can compute
 . _o0:0
 # variables
 . iter:0
