@@ -12,7 +12,6 @@ PQ=0
 
 if [[ $Nbits -eq "16" ]]; then
     PQ=239.251
-    echo ala
 elif [[ $Nbits -eq "32" ]]; then
     PQ=63199.64567
 elif [[ $Nbits -eq "64" ]]; then

@@ -1,13 +1,16 @@
 #!/bin/bash
 
-if [ $# -ne 3 ]; then
-    echo Usage: "$0" Nbits beta num_to_encypt
-    exit
+if [ $# -ne 4 ]; then
+    echo Usage: "$0" n Nbits beta num_to_encypt
+    echo or
+    echo Usage: "$0" f Nbits beta file_to_encrypt
+    exit -1
 fi
 
-Nbits="$1"
-beta="$2"
-num="$3"
+mode="$1"
+Nbits="$2"
+beta="$3"
+numOrFile="$4"
 PQ=0
 
 if [[ $Nbits -eq "16" ]]; then
@@ -25,13 +28,21 @@ elif [[ $Nbits -eq "512" ]]; then
 elif [[ $Nbits -eq "1024" ]]; then
     PQ=13392849694255970315601419090152597688339809774933571293865724091737666496951381207429127235940384883608845778583380210687006370486238723021460371010217257.13403952390292880134486926689236901739298695038033079040680862117777593853851234125818128702776151240584166261477766002390185782669746209391687589482784501
 else
-    echo Wrong Nbits.
-    exit
+    echo "Wrong Nbits given. Try 16, 32, ..., 1024."
+    exit -1
 fi
 
-echo "../../_bin_unx/ceal -p \"k=5 r=17 beta=$beta PQ=$PQ\" -c xenc @$num"
-res="$(../../_bin_unx/ceal -p "k=5 r=17 beta=$beta PQ=$PQ" -c xenc @$num)"
-
-echo $res
-echo $res > "inputs/input"$num"_N"$Nbits"_b"$beta".sec"
-
+if [ $mode == f ]; then
+    echo "../_bin_unx/ceal -p \"k=5 r=17 beta=$beta PQ=$PQ\" -c xenc $numOrFile"
+    res="$(../_bin_unx/ceal -p "k=5 r=17 beta=$beta PQ=$PQ" -c xenc $numOrFile)"
+    echo $res
+    echo $res > "./input"$numOrFile"_N"$Nbits"_b"$beta".db.sec"
+elif [ $mode == n ]; then
+    echo "../_bin_unx/ceal -p \"k=5 r=17 beta=$beta PQ=$PQ\" -c xenc @$numOrFile"
+    res="$(../_bin_unx/ceal -p "k=5 r=17 beta=$beta PQ=$PQ" -c xenc @$numOrFile)"
+    echo $res
+    echo $res > "./input"$numOrFile"_N"$Nbits"_b"$beta".sec"
+else
+    echo "Wrong mode given. Try f for file or n for number"
+    exit -1
+fi
