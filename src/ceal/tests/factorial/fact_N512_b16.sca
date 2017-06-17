@@ -35,7 +35,7 @@ fact_loop:
 . x:~0 y:~0 result:~0
 
 # the factorial number to compute
-input:;.include datax "../factorial/input8_N512_b16.sec"
+input:;.include datax "../factorial/inputs/input8_N512_b16.sec"
 
 .include "secure.lib"
 
