@@ -21,7 +21,6 @@ fib_loop:
     .seq i input x                  # x = i == input 
     .smul x fi y                    # y = x * fi
     .add y result                   # result += y
-    .outd result
 
     .mov f1 fi             
     .add f2 fi                      # fi = fi + f2
@@ -32,7 +31,7 @@ fib_loop:
 .outd result
 .halt
 
-. maxnum:30 # the maximum factorial the program can compute
+. maxnum:32 # the maximum factorial the program can compute
 . _o0:0
 # variables
 . iter:0
@@ -40,7 +39,7 @@ fib_loop:
 . x:~0 y:~0 result:~0
 
 # the Fibonacci number to compute
-input:;.include datax "input24_N512_b16.sec"
+input:;.include datax "../fibonacci/inputs/input24_N512_b16.sec"
 
 .include "secure.lib"
 

@@ -31,7 +31,7 @@ fib_loop:
 .outd result
 .halt
 
-. maxnum:50 # the maximum factorial the program can compute
+. maxnum:40 # the maximum factorial the program can compute
 . _o0:0
 # variables
 . iter:0
@@ -39,7 +39,7 @@ fib_loop:
 . x:~0 y:~0 result:~0
 
 # the Fibonacci number to compute
-input:;.include datax "input36_N1024_b24.sec"
+input:;.include datax "../fibonacci/inputs/input36_N1024_b24.sec"
 
 .include "secure.lib"
 

@@ -8,8 +8,8 @@
 ## and keep the result of the requested number.
 ##########################################################################
 
-.pragma k=5 r=17 beta=16
-.pragma PQ=13392849694255970315601419090152597688339809774933571293865724091737666496951381207429127235940384883608845778583380210687006370486238723021460371010217257.13403952390292880134486926689236901739298695038033079040680862117777593853851234125818128702776151240584166261477766002390185782669746209391687589482784501
+.pragma k=5 r=17 beta=24
+.pragma PQ=338871469111127928412308213206819656391.338531414912581056934822037249894061881
 .pragma io=ts incdir=../lib/
 
 .mov _o0 iter                       # iter = 0
@@ -31,7 +31,7 @@ fib_loop:
 .outd result
 .halt
 
-. maxnum:32 # the maximum factorial the program can compute
+. maxnum:40 # the maximum factorial the program can compute
 . _o0:0
 # variables
 . iter:0
@@ -39,7 +39,7 @@ fib_loop:
 . x:~0 y:~0 result:~0
 
 # the Fibonacci number to compute
-input:;.include datax "../fibonacci/inputs/input24_N1024_b16.sec"
+input:;.include datax "../fibonacci/inputs/input36_N256_b24.sec"
 
 .include "secure.lib"
 
