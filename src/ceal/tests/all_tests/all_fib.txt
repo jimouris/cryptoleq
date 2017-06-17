@@ -1,0 +1,10 @@
+../../_bin_unx/ceal ../fibonacci/fib_N64_b16.sca
+../../_bin_unx/ceal ../fibonacci/fib_N64_b24.sca
+../../_bin_unx/ceal ../fibonacci/fib_N128_b16.sca
+../../_bin_unx/ceal ../fibonacci/fib_N128_b24.sca
+../../_bin_unx/ceal ../fibonacci/fib_N256_b16.sca
+../../_bin_unx/ceal ../fibonacci/fib_N256_b24.sca
+../../_bin_unx/ceal ../fibonacci/fib_N512_b16.sca
+../../_bin_unx/ceal ../fibonacci/fib_N512_b24.sca
+../../_bin_unx/ceal ../fibonacci/fib_N1024_b16.sca
+../../_bin_unx/ceal ../fibonacci/fib_N1024_b24.sca
