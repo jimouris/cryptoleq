@@ -1,0 +1,15 @@
+../../_bin_unx/ceal ../prime_numbers/esoe_N1024_M1024.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N1024_M256.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N1024_M512.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N128_M1024.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N128_M256.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N128_M512.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N256_M1024.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N256_M256.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N256_M512.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N512_M1024.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N512_M256.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N512_M512.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N64_M1024.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N64_M256.sca
+../../_bin_unx/ceal ../prime_numbers/esoe_N64_M512.sca
