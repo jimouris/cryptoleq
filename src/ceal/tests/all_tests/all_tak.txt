@@ -1,0 +1,15 @@
+../../_bin_unx/ceal ../tak_function/tak_N1024_r3.sca
+../../_bin_unx/ceal ../tak_function/tak_N1024_r4.sca
+../../_bin_unx/ceal ../tak_function/tak_N1024_r5.sca
+../../_bin_unx/ceal ../tak_function/tak_N128_r3.sca
+../../_bin_unx/ceal ../tak_function/tak_N128_r4.sca
+../../_bin_unx/ceal ../tak_function/tak_N128_r5.sca
+../../_bin_unx/ceal ../tak_function/tak_N256_r3.sca
+../../_bin_unx/ceal ../tak_function/tak_N256_r4.sca
+../../_bin_unx/ceal ../tak_function/tak_N256_r5.sca
+../../_bin_unx/ceal ../tak_function/tak_N512_r3.sca
+../../_bin_unx/ceal ../tak_function/tak_N512_r4.sca
+../../_bin_unx/ceal ../tak_function/tak_N512_r5.sca
+../../_bin_unx/ceal ../tak_function/tak_N64_r3.sca
+../../_bin_unx/ceal ../tak_function/tak_N64_r4.sca
+../../_bin_unx/ceal ../tak_function/tak_N64_r5.sca
