@@ -35,8 +35,8 @@ fi
 if [ $mode == f ]; then
     echo "../_bin_unx/ceal -p \"k=5 r=17 beta=$beta PQ=$PQ\" -c xenc $numOrFile"
     res="$(../_bin_unx/ceal -p "k=5 r=17 beta=$beta PQ=$PQ" -c xenc $numOrFile)"
-    echo $res
-    echo $res > "./input"$numOrFile"_N"$Nbits"_b"$beta".db.sec"
+    mv $numOrFile".out" $numOrFile"_N"$Nbits"_b"$beta".db.sec"
+    echo $numOrFile"_N"$Nbits"_b"$beta".db.sec"
 elif [ $mode == n ]; then
     echo "../_bin_unx/ceal -p \"k=5 r=17 beta=$beta PQ=$PQ\" -c xenc @$numOrFile"
     res="$(../_bin_unx/ceal -p "k=5 r=17 beta=$beta PQ=$PQ" -c xenc @$numOrFile)"
