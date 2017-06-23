@@ -67,7 +67,7 @@ loop:
 . max:~0 max_tmp:~0 min:~0 diff:~0 diff_tmp:~0 
 
 # constants
-. len:20
+. len:64
 . _o0:0
 
 db_start:
