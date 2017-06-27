@@ -54,7 +54,7 @@ def autolabel(rects):
 autolabel(rects1)
 autolabel(rects2)
 
-# plt.show()
+plt.show()
 
-plt.tight_layout()
-plt.savefig(figname,dpi=mydpi)
+# plt.tight_layout()
+# plt.savefig("./charts/"+figname,dpi=mydpi)

@@ -77,4 +77,5 @@ autolabel(rects5)
 plt.show()
 
 # plt.tight_layout()
-# plt.savefig(figname,dpi=mydpi)
+# plt.savefig("./charts/"+figname,dpi=mydpi)
+
