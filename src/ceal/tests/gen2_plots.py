@@ -54,7 +54,14 @@ rects5 = ax.bar(index + 2*width, data1024, width, color='purple')
 
 
 # add some text for labels, title and axes ticks
-ax.set_title(string.capwords(benchmark))
+if benchmark == "tak":
+    ax.set_title("Tak function,  beta = 8")
+elif benchmark == "primes":
+    ax.set_title("Endless Sieve of Eratosthenes,  beta = 16")
+elif benchmark == "isort":
+    ax.set_title("Insertion Sort,  beta = 16")
+else:
+    ax.set_title(string.capwords(benchmark))
 ax.set_yscale('log')
 ax.set_ylabel("time (sec.)")
 ax.set_xticks(index)
