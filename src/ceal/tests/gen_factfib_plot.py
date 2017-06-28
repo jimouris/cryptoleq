@@ -38,8 +38,11 @@ ax.set_title(string.capwords("Factorial & Fibonacci"))
 ax.set_yscale('log')
 ax.set_ylabel("time (sec.)")
 ax.set_xticks(index)
-ax.set_xlabel("N bits")
+ax.set_xlabel("Security Parameter Size")
 ax.set_xticklabels(nbits)
+
+# ax.grid(which='major', color='gray', linestyle='dotted')
+# ax.grid(which='major', color='gray', linestyle='dashed')
 
 ax.legend((rects1[0], rects2[0], rects3[0], rects4[0]), ("Factorial beta = 16", "Factorial beta = 24", "Fibonacci beta = 16", "Fibonacci beta = 24"), fontsize=9)
 

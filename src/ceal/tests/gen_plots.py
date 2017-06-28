@@ -40,7 +40,7 @@ rects2 = ax.bar(index + width, beta24, width, color='firebrick')
 ax.set_title(string.capwords(benchmark))
 ax.set_yscale('log')
 ax.set_ylabel("time (sec.)")
-ax.set_xlabel("N bits")
+ax.set_xlabel("Security Parameter Size")
 ax.set_xticks(index + width / 2)
 ax.set_xticklabels(nbits)
 
