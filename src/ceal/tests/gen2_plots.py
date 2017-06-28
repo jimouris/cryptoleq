@@ -42,28 +42,28 @@ data1024 = data[benchmark]['1024']
 
 N = len(data64)
 index = np.arange(N)  # the x locations for the groups
-width = 0.15       # the width of the bars
+width = 0.185       # the width of the bars
 
 fig, ax = plt.subplots()
-# rects1 = ax.bar(index - 2*width, data64, width, color='dodgerblue')
-rects1 = ax.bar(index - 2*width, data64, width, color='steelblue')
-rects2 = ax.bar(index - width, data128, width, color='firebrick')
-rects3 = ax.bar(index, data256, width, color='darkorange')
-rects4 = ax.bar(index + width, data512, width, color='forestgreen')
-rects5 = ax.bar(index + 2*width, data1024, width, color='purple')
-
+rects1 = ax.bar(index - 2*width, data64, width, color='xkcd:very light blue', hatch='xxxx', edgecolor='black', linewidth=1)
+rects2 = ax.bar(index - width, data128, width, color='xkcd:very light green', hatch='....', edgecolor='black', linewidth=1)
+rects3 = ax.bar(index, data256, width, color='xkcd:ecru', hatch='/////', edgecolor='black', linewidth=1)
+rects4 = ax.bar(index + width, data512, width, color='lightgoldenrodyellow', hatch='----', edgecolor='black', linewidth=1)
+rects5 = ax.bar(index + 2*width, data1024, width, color='xkcd:light peach', hatch='\\\\\\\\\\', edgecolor='black', linewidth=1)
 
 # add some text for labels, title and axes ticks
-if benchmark == "tak":
-    ax.set_title("Tak function,  beta = 8")
-elif benchmark == "primes":
-    ax.set_title("Endless Sieve of Eratosthenes,  beta = 16")
-elif benchmark == "isort":
-    ax.set_title("Insertion Sort,  beta = 16")
-else:
-    ax.set_title(string.capwords(benchmark))
+# if benchmark == "tak":
+#     ax.set_title("Tak function,  beta = 8")
+# elif benchmark == "primes":
+#     ax.set_title("Endless Sieve of Eratosthenes,  beta = 16")
+# elif benchmark == "isort":
+#     ax.set_title("Insertion Sort,  beta = 16")
+# else:
+#     ax.set_title(string.capwords(benchmark))
+
 ax.set_yscale('log')
-ax.set_ylabel("time (sec.)")
+# ax.set_ylim([10000, 1000000])
+ax.set_ylabel("time (sec.) x e4")
 ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
@@ -73,7 +73,11 @@ ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsi
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
-        ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%d' % int(height), ha='center', va='bottom', fontsize=8)
+        if height/10000 > 10:
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height/10000), ha='center', va='bottom', fontsize=8)
+        else:
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height/10000), ha='center', va='bottom', fontsize=8)
+        # ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%d' % int(height), ha='center', va='bottom', fontsize=9)
 
 autolabel(rects1)
 autolabel(rects2)
@@ -84,5 +88,4 @@ autolabel(rects5)
 plt.show()
 
 # plt.tight_layout()
-# plt.savefig("./charts/"+figname,dpi=mydpi)
-
+# plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0)

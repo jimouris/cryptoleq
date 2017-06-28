@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import matplotlib.pyplot as plt
+from matplotlib import colors
 import numpy as np
 import sys
 import string
@@ -30,16 +31,16 @@ beta24 = data[benchmark]['beta24']
 
 N = len(beta16)
 index = np.arange(N)  # the x locations for the groups
-width = 0.35       # the width of the bars
+width = 0.42       # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(index, beta16, width, color='steelblue')
-rects2 = ax.bar(index + width, beta24, width, color='firebrick')
+rects1 = ax.bar(index, beta16, width, color='xkcd:very light blue', hatch='xxxx', edgecolor='black', linewidth=1)
+rects2 = ax.bar(index + width, beta24, width, color='xkcd:very light green', hatch='....', edgecolor='black', linewidth=1)
 
 # add some text for labels, title and axes ticks
-ax.set_title(string.capwords(benchmark))
+# ax.set_title(string.capwords(benchmark))
 ax.set_yscale('log')
-ax.set_ylabel("time (sec.)")
+ax.set_ylabel("time (sec.) x e4")
 ax.set_xlabel("Security Parameter Size")
 ax.set_xticks(index + width / 2)
 ax.set_xticklabels(nbits)
@@ -49,7 +50,11 @@ ax.legend((rects1[0], rects2[0]), ("beta = 16", "beta = 24"), fontsize=9)
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
-        ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%d' % int(height), ha='center', va='bottom', fontsize=8)
+        if height/10000 > 10:
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height/10000), ha='center', va='bottom', fontsize=8)
+        else:
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height/10000), ha='center', va='bottom', fontsize=8)
+        # ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%d' % int(height), ha='center', va='bottom', fontsize=8)
 
 autolabel(rects1)
 autolabel(rects2)
@@ -57,4 +62,5 @@ autolabel(rects2)
 plt.show()
 
 # plt.tight_layout()
-# plt.savefig("./charts/"+figname,dpi=mydpi)
+# plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0)
+
