@@ -6,7 +6,7 @@
 ##########################################################################
 
 .pragma k=5 r=17 beta=8
-.pragma PQ=239.251
+.pragma PQ=338871469111127928412308213206819656391.338531414912581056934822037249894061881
 .pragma io=ts incdir=../lib/
 
 
@@ -107,7 +107,7 @@ recursion_return:
 
 # data
 db_start:
-.include datax "db.sec"
+.include datax "../permutations/db/db4_N256_b8.sec"
 db_end:
 db_size: (db_end - db_start)
 
