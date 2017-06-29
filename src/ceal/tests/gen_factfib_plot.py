@@ -27,11 +27,12 @@ index = np.arange(N)  # the x locations for the groups
 width = 0.228       # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(index - 1.5*width, factbeta16, width, color='xkcd:very light blue', hatch='xxxx', edgecolor='black', linewidth=1)
-rects2 = ax.bar(index - 0.5*width, factbeta24, width, color='xkcd:very light green', hatch='....', edgecolor='black', linewidth=1)
-rects3 = ax.bar(index + 0.5*width, fibbeta16, width, color='xkcd:ecru', hatch='/////', edgecolor='black', linewidth=1)
-rects4 = ax.bar(index + 1.5*width, fibbeta24, width, color='lightgoldenrodyellow', hatch='----', edgecolor='black', linewidth=1)
 
+# xkcd:pale mauve
+rects1 = ax.bar(index - 1.5*width, factbeta16, width, color='xkcd:light pink', hatch='xxxx', edgecolor='black', linewidth=1)
+rects2 = ax.bar(index - 0.5*width, factbeta24, width, color='xkcd:very light blue', hatch='....', edgecolor='black', linewidth=1)
+rects3 = ax.bar(index + 0.5*width, fibbeta16, width, color='xkcd:very light green', hatch='/////', edgecolor='black', linewidth=1)
+rects4 = ax.bar(index + 1.5*width, fibbeta24, width, color='xkcd:ecru', hatch='----', edgecolor='black', linewidth=1)
 
 # add some text for labels, title and axes ticks
 # ax.set_title(string.capwords("Factorial & Fibonacci"))

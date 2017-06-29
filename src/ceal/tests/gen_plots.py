@@ -34,8 +34,8 @@ index = np.arange(N)  # the x locations for the groups
 width = 0.42       # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(index, beta16, width, color='xkcd:very light blue', hatch='xxxx', edgecolor='black', linewidth=1)
-rects2 = ax.bar(index + width, beta24, width, color='xkcd:very light green', hatch='....', edgecolor='black', linewidth=1)
+rects1 = ax.bar(index, beta16, width, color='xkcd:light pink', hatch='xxxx', edgecolor='black', linewidth=1)
+rects2 = ax.bar(index + width, beta24, width, color='xkcd:very light blue', hatch='....', edgecolor='black', linewidth=1)
 
 # add some text for labels, title and axes ticks
 # ax.set_title(string.capwords(benchmark))

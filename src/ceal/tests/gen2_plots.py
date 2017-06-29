@@ -45,10 +45,10 @@ index = np.arange(N)  # the x locations for the groups
 width = 0.185       # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(index - 2*width, data64, width, color='xkcd:very light blue', hatch='xxxx', edgecolor='black', linewidth=1)
-rects2 = ax.bar(index - width, data128, width, color='xkcd:very light green', hatch='....', edgecolor='black', linewidth=1)
-rects3 = ax.bar(index, data256, width, color='xkcd:ecru', hatch='/////', edgecolor='black', linewidth=1)
-rects4 = ax.bar(index + width, data512, width, color='lightgoldenrodyellow', hatch='----', edgecolor='black', linewidth=1)
+rects1 = ax.bar(index - 2*width, data64, width, color='xkcd:light pink', hatch='xxxx', edgecolor='black', linewidth=1)
+rects2 = ax.bar(index - width, data128, width, color='xkcd:very light blue', hatch='....', edgecolor='black', linewidth=1)
+rects3 = ax.bar(index, data256, width, color='xkcd:very light green', hatch='/////', edgecolor='black', linewidth=1)
+rects4 = ax.bar(index + width, data512, width, color='xkcd:ecru', hatch='----', edgecolor='black', linewidth=1)
 rects5 = ax.bar(index + 2*width, data1024, width, color='xkcd:light peach', hatch='\\\\\\\\\\', edgecolor='black', linewidth=1)
 
 # add some text for labels, title and axes ticks
