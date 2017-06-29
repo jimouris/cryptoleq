@@ -17,6 +17,7 @@ else:
 
 mydpi = 300
 figname = benchmark+'.png'
+pltsize = (7, 4) # default (8, 6)
 nbits = [64, 128, 256, 512, 1024]
 
 data = {
@@ -33,7 +34,7 @@ N = len(beta16)
 index = np.arange(N)  # the x locations for the groups
 width = 0.42       # the width of the bars
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=pltsize)
 rects1 = ax.bar(index, beta16, width, color='xkcd:light pink', hatch='xxxx', edgecolor='black', linewidth=1)
 rects2 = ax.bar(index + width, beta24, width, color='xkcd:very light blue', hatch='....', edgecolor='black', linewidth=1)
 

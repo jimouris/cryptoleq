@@ -9,6 +9,7 @@ benchmark='factfib'
 
 mydpi = 300
 figname = benchmark+'.png'
+pltsize = (7, 4) # default (8, 6)
 nbits = [64, 128, 256, 512, 1024]
 
 
@@ -26,7 +27,7 @@ N = len(factbeta16)
 index = np.arange(N)  # the x locations for the groups
 width = 0.228       # the width of the bars
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=pltsize)
 
 # xkcd:pale mauve
 rects1 = ax.bar(index - 1.5*width, factbeta16, width, color='xkcd:light pink', hatch='xxxx', edgecolor='black', linewidth=1)
@@ -61,6 +62,7 @@ autolabel(rects1)
 autolabel(rects2)
 autolabel(rects3)
 autolabel(rects4)
+
 
 plt.show()
 
