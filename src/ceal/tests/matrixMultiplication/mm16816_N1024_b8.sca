@@ -104,7 +104,7 @@ header_end:
 header_size: (header_end - header_start)
 
 db_start:
-.include datax "../matrixMultiplication/db/db16x8x16_N64_b8.sec"
+.include datax "../matrixMultiplication/db/db16x8x16_N1024_b8.sec"
 db_end:
 db_size: (db_end - db_start)
 
