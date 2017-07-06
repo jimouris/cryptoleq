@@ -29,7 +29,7 @@ data = {
 
 for key, value in data[benchmark].items():
     for i in range(len(value)):
-        if benchmark == "tak" or benchmark == "isort":
+        if benchmark == "tak" or benchmark == "isort" or benchmark == "psi":
             value[i] /= 10000
         elif benchmark == "primes":
             value[i] /= 1000
@@ -77,8 +77,9 @@ ax.set_yscale('log')
 ax.set_ylim([0.01, 100])
 if benchmark == "primes":
     ax.set_ylabel("time (sec.) x $10^3$")
-elif benchmark == "tak" or benchmark == "isort":
+elif benchmark == "tak" or benchmark == "isort" or benchmark == "psi":
     ax.set_ylabel("time (sec.) x $10^4$")
+ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
 ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=9)
