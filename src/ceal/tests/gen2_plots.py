@@ -6,12 +6,12 @@ import sys
 import string
 
 if len(sys.argv) != 2:
-    print "Usage:\t python " + sys.argv[0] + " [primes|tak|isort]"
+    print "Usage:\t python " + sys.argv[0] + " [primes|tak|isort|psi]"
     sys.exit(1)
-if sys.argv[1] == "primes" or sys.argv[1] == "tak" or sys.argv[1] == "isort":
+if sys.argv[1] == "primes" or sys.argv[1] == "tak" or sys.argv[1] == "isort" or sys.argv[1] == "psi":
     benchmark = sys.argv[1]
 else:
-    print "Usage:\t python " + sys.argv[0] + " [primes|tak|isort]"
+    print "Usage:\t python " + sys.argv[0] + " [primes|tak|isort|psi]"
     sys.exit(1)
 
 mydpi = 300
@@ -23,7 +23,8 @@ nbits = ['N = 64', 'N = 128', 'N = 256', 'N = 512', 'N = 1024']
 data = {
     'tak' : { '64' : [347.26, 2838.32, 19559.22], '128' : [631.3, 5143.88, 36096.32], '256' : [1451.3, 11863.95, 83044.28], '512' : [3695.09, 30228.41, 205365.2],  '1024' : [11762.58, 98300.55, 500300.55] },
     'primes' :  { '64' : [80.57, 157.46, 317.46], '128' : [190.43, 366.87, 729.19], '256' : [433.87, 816.97, 1598.71], '512' : [1397.44, 2468.49, 4618.86],  '1024' : [4388.98, 7789.04, 14060.56] },
-    'isort' :  { '64' : [152.93, 615.65, 2511.54], '128' : [349.79, 1420.64, 5707.16], '256' : [757.48, 3084.15, 12375.45], '512' : [2171.9, 8734.65, 35494.2],  '1024' : [6777.22, 27367.96, 108343.76] }
+    'isort' :  { '64' : [152.93, 615.65, 2511.54], '128' : [349.79, 1420.64, 5707.16], '256' : [757.48, 3084.15, 12375.45], '512' : [2171.9, 8734.65, 35494.2],  '1024' : [6777.22, 27367.96, 108343.76] },
+    'psi' :  { '64' : [249.25, 968.8, 3845.82], '128' : [379.71, 1462.32, 5786.62], '256' : [828.24, 3127.55, 12225.06], '512' : [2479.54, 9191.15, 36009.76],  '1024' : [7133.17, 27015.24, 108343.76] }
 }
 
 for key, value in data[benchmark].items():
@@ -38,7 +39,8 @@ for key, value in data[benchmark].items():
 x_axis_labels = {
     'tak' : ("Input range", ['[0-3]', '[0-4]', '[0-5]']),
     'primes' : ("Maximum number to compute", [256, 512, 1024]),
-    'isort' : ("Array length", [32, 64, 128])
+    'isort' : ("Array length", [32, 64, 128]),
+    'psi' : ("Arrays length", ["16x16", "32x32", "64x64"])
 }
 
 max_num = [256, 512, 1024]
