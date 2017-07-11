@@ -17,7 +17,7 @@ else:
 
 mydpi = 300
 figname = benchmark+'.png'
-pltsize = (7, 3) # default (8, 6)
+pltsize = (6, 1.8) # default (8, 6)
 nbits = [64, 128, 256, 512, 1024]
 
 data = {
@@ -48,7 +48,7 @@ rects2 = ax.bar(index + width, beta24, width, color='xkcd:very light blue', hatc
 
 ax.set_yscale('log')
 if benchmark == "nqueens":
-    ax.set_ylim([0.01, 80])
+    ax.set_ylim([0.05, 60])
     ax.set_ylabel("time (sec.) x $10^4$")
 elif benchmark == "factorial" or benchmark == "fibonacci":
     ax.set_ylim([0.05, 20])
@@ -56,7 +56,7 @@ elif benchmark == "factorial" or benchmark == "fibonacci":
 ax.set_xlabel("Security Parameter Size")
 ax.set_xticks(index + width / 2)
 ax.set_xticklabels(nbits)
-ax.legend((rects1[0], rects2[0]), ("beta = 16", "beta = 24"), fontsize=9)
+ax.legend((rects1[0], rects2[0]), ("$\\beta$ = 16", "$\\beta$ = 24"), fontsize=9)
 
 def autolabel(rects):
     for rect in rects:
@@ -69,8 +69,8 @@ def autolabel(rects):
 autolabel(rects1)
 autolabel(rects2)
 
-plt.show()
+# plt.show()
 
-# plt.tight_layout()
-# plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
+plt.tight_layout()
+plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
 

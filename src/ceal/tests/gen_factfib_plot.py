@@ -9,7 +9,7 @@ benchmark='factfib'
 
 mydpi = 300
 figname = benchmark+'.png'
-pltsize = (7, 3) # default (8, 6)
+pltsize = (6, 2.2) # default (8, 6)
 nbits = [64, 128, 256, 512, 1024]
 
 
@@ -35,7 +35,7 @@ fibbeta24 = data['fibonacci']['beta24']
 
 N = len(factbeta16)
 index = np.arange(N)  # the x locations for the groups
-width = 0.228       # the width of the bars
+width = 0.227       # the width of the bars
 
 fig, ax = plt.subplots(figsize=pltsize)
 
@@ -48,20 +48,20 @@ rects4 = ax.bar(index + 1.5*width, fibbeta24, width, color='xkcd:ecru', hatch='-
 # add some text for labels, title and axes ticks
 # ax.set_title(string.capwords("Factorial & Fibonacci"))
 ax.set_yscale('log')
-ax.set_ylim([0.05, 20])
+ax.set_ylim([0.05, 50])
 ax.set_ylabel("time (sec.) x $10^2$")
 ax.set_xticks(index)
 ax.set_xlabel("Security Parameter Size")
 ax.set_xticklabels(nbits)
-ax.legend((rects1[0], rects2[0], rects3[0], rects4[0]), ("Factorial beta = 16", "Factorial beta = 24", "Fibonacci beta = 16", "Fibonacci beta = 24"), fontsize=9)
+ax.legend((rects1[0], rects2[0], rects3[0], rects4[0]), ("Factorial $\\beta$ = 16", "Factorial $\\beta$ = 24", "Fibonacci $\\beta$ = 16", "Fibonacci $\\beta$ = 24"), fontsize=8)
 
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
         if height > 10:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height), ha='center', va='bottom', fontsize=6)
         else:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=6)
 
 autolabel(rects1)
 autolabel(rects2)
@@ -69,8 +69,8 @@ autolabel(rects3)
 autolabel(rects4)
 
 
-plt.show()
+# plt.show()
 
-# plt.tight_layout()
-# plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
+plt.tight_layout()
+plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
 

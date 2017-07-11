@@ -16,7 +16,16 @@ else:
 
 mydpi = 300
 figname = benchmark+'.png'
-pltsize = (7, 3) # default (8, 6)
+
+if benchmark == "primes":
+    pltsize = (6, 2.5) # default (8, 6)
+elif benchmark == "tak":
+    pltsize = (6, 2.2) # default (8, 6)
+elif benchmark == "isort":
+    pltsize = (6, 2.2) # default (8, 6)
+elif benchmark == "psi":
+    pltsize = (6, 2.2) # default (8, 6)
+
 nbits = ['N = 64', 'N = 128', 'N = 256', 'N = 512', 'N = 1024']
 
 
@@ -40,7 +49,7 @@ x_axis_labels = {
     'tak' : ("Input range", ['[0-3]', '[0-4]', '[0-5]']),
     'primes' : ("Maximum number to compute", [256, 512, 1024]),
     'isort' : ("Array length", [32, 64, 128]),
-    'psi' : ("Arrays length", ["16x16", "32x32", "64x64"])
+    'psi' : ("Arrays length", ["16$\cap$16", "32$\cap$32", "64$\cap$64"])
 }
 
 max_num = [256, 512, 1024]
@@ -74,23 +83,30 @@ rects5 = ax.bar(index + 2*width, data1024, width, color='xkcd:light peach', hatc
 #     ax.set_title(string.capwords(benchmark))
 
 ax.set_yscale('log')
-ax.set_ylim([0.01, 100])
 if benchmark == "primes":
+    ax.set_ylim([0.06, 100])
     ax.set_ylabel("time (sec.) x $10^3$")
-elif benchmark == "tak" or benchmark == "isort" or benchmark == "psi":
+elif benchmark == "tak":
+    ax.set_ylim([0.02, 120])
+    ax.set_ylabel("time (sec.) x $10^4$")
+elif benchmark == "isort":
+    ax.set_ylim([0.01, 30])
+    ax.set_ylabel("time (sec.) x $10^4$")
+elif benchmark == "psi":
+    ax.set_ylim([0.01, 40])
     ax.set_ylabel("time (sec.) x $10^4$")
 ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
-ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=9)
+ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=8)
 
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
         if height > 10:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height), ha='center', va='bottom', fontsize=8)
         else:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.3f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8)
 
 autolabel(rects1)
 autolabel(rects2)
@@ -98,7 +114,7 @@ autolabel(rects3)
 autolabel(rects4)
 autolabel(rects5)
 
-plt.show()
+# plt.show()
 
-# plt.tight_layout()
-# plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
+plt.tight_layout()
+plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
