@@ -66,6 +66,9 @@ index = np.arange(N)  # the x locations for the groups
 width = 0.185       # the width of the bars
 
 fig, ax = plt.subplots(figsize=pltsize)
+
+ax.margins(0.03, 0.03)  
+
 rects1 = ax.bar(index - 2*width, data64, width, color='xkcd:light pink', hatch='xxx', edgecolor='black', linewidth=1)
 rects2 = ax.bar(index - width, data128, width, color='xkcd:very light blue', hatch='...', edgecolor='black', linewidth=1)
 rects3 = ax.bar(index, data256, width, color='xkcd:very light green', hatch='////', edgecolor='black', linewidth=1)

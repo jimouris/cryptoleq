@@ -17,7 +17,7 @@ else:
 
 mydpi = 300
 figname = benchmark+'.png'
-pltsize = (6, 1.8) # default (8, 6)
+pltsize = (6, 1.9) # default (8, 6)
 nbits = [64, 128, 256, 512, 1024]
 
 data = {
@@ -43,6 +43,7 @@ index = np.arange(N)  # the x locations for the groups
 width = 0.42       # the width of the bars
 
 fig, ax = plt.subplots(figsize=pltsize)
+ax.margins(0.04, 0.04) 
 rects1 = ax.bar(index, beta16, width, color='xkcd:light pink', hatch='xxx', edgecolor='black', linewidth=1)
 rects2 = ax.bar(index + width, beta24, width, color='xkcd:very light blue', hatch='...', edgecolor='black', linewidth=1)
 
@@ -56,7 +57,7 @@ elif benchmark == "factorial" or benchmark == "fibonacci":
 ax.set_xlabel("Security Parameter Size")
 ax.set_xticks(index + width / 2)
 ax.set_xticklabels(nbits)
-ax.legend((rects1[0], rects2[0]), ("$\\beta$ = 16", "$\\beta$ = 24"), fontsize=9)
+ax.legend((rects1[0], rects2[0]), ("$\\beta$ = 16", "$\\beta$ = 24"), fontsize=8)
 
 def autolabel(rects):
     for rect in rects:
