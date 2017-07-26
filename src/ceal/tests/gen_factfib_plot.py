@@ -7,7 +7,7 @@ import string
 
 benchmark='factfib'
 
-mydpi = 1200
+mydpi = 200
 figname = benchmark+'.png'
 # pltsize = (9, 3) # default (8, 6)
 # pltsize = (6, 2.2) # default (8, 6)
