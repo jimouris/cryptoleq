@@ -26,7 +26,7 @@ elif benchmark == "isort":
 elif benchmark == "psi":
     pltsize = (6, 2.2) # default (8, 6)
 
-nbits = ['N = 64', 'N = 128', 'N = 256', 'N = 512', 'N = 1024']
+nbits = ['64-bit $\lambda$', '128-bit $\lambda$', '256-bit $\lambda$', '512-bit $\lambda$', '1024-bit $\lambda$']
 
 
 data = {
