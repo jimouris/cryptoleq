@@ -46,10 +46,10 @@ for key, value in data[benchmark].items():
 
 
 x_axis_labels = {
-    'tak' : ("Input range", ['[0-3]', '[0-4]', '[0-5]']),
+    'tak' : ("Inputs ($x, y, z$) range", ['[0-3]', '[0-4]', '[0-5]']),
     'primes' : ("Maximum number to compute", [256, 512, 1024]),
-    'isort' : ("Array length", [32, 64, 128]),
-    'psi' : ("Arrays length", ["16$\cap$16", "32$\cap$32", "64$\cap$64"])
+    'isort' : ("Number of Array Elements ($N$)", [32, 64, 128]),
+    'psi' : ("Number of Each Array Elements ($N \cap N$)", ["$16 \cap 16$", "$32 \cap 32$", "$64 \cap 64$"])
 }
 
 max_num = [256, 512, 1024]

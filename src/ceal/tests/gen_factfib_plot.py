@@ -55,7 +55,7 @@ ax.set_yscale('log')
 ax.set_ylim([0.05, 40])
 ax.set_ylabel("time (sec.) x $10^2$")
 ax.set_xticks(index)
-ax.set_xlabel("Security Parameter Size")
+ax.set_xlabel("Security Parameter ($\lambda$) bits")
 ax.set_xticklabels(nbits)
 ax.legend((rects1[0], rects2[0], rects3[0], rects4[0]), ("Factorial $\\beta$ = 16", "Factorial $\\beta$ = 24", "Fibonacci $\\beta$ = 16", "Fibonacci $\\beta$ = 24"), ncol=2, fontsize=9)
 

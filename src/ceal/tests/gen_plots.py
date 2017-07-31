@@ -54,7 +54,7 @@ if benchmark == "nqueens":
 elif benchmark == "factorial" or benchmark == "fibonacci":
     ax.set_ylim([0.05, 20])
     ax.set_ylabel("time (sec.) x $10^2$")
-ax.set_xlabel("Security Parameter Size")
+ax.set_xlabel("Security Parameter ($\lambda$) bits")
 ax.set_xticks(index + width / 2)
 ax.set_xticklabels(nbits)
 ax.legend((rects1[0], rects2[0]), ("$\\beta$ = 16", "$\\beta$ = 24"), fontsize=8)
