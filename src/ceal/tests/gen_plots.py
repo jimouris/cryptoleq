@@ -52,7 +52,7 @@ if benchmark == "nqueens":
     ax.set_ylim([0.05, 60])
     ax.set_ylabel("time (sec.) x $10^4$")
 elif benchmark == "factorial" or benchmark == "fibonacci":
-    ax.set_ylim([0.05, 20])
+    ax.set_ylim([0.05, 30])
     ax.set_ylabel("time (sec.) x $10^2$")
 ax.set_xlabel("Security Parameter ($\lambda$) bits")
 ax.set_xticks(index + width / 2)

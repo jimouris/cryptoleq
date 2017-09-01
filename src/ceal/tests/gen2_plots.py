@@ -55,7 +55,7 @@ x_axis_labels = {
     'tak' : ("Inputs ($x, y, z$) range", ['[0-3]', '[0-4]', '[0-5]']),
     'primes' : ("Maximum number to compute", [256, 512, 1024]),
     'isort' : ("Number of Array Elements ($N$)", [32, 64, 128]),
-    'psi' : ("Number of Each Array Elements ($N \cap N$)", ["$16 \cap 16$", "$32 \cap 32$", "$64 \cap 64$"]),
+    'psi' : ("Number of Elements in each Set ($N \cap N$)", ["$16 \cap 16$", "$32 \cap 32$", "$64 \cap 64$"]),
     'mmult' : ("Matrices Size", ['$[8 \\times 8] \\times [8 \\times 8]$', '$[12 \\times 8] \\times [8 \\times 12]$', '$[16 \\times 8] \\times [8 \\times 16]$']),
     'perm' : ("Items", [3, 4, 5, 6])
 }
