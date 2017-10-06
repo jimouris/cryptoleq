@@ -16,7 +16,7 @@
 
 
 .pragma k=5 r=17 beta=16
-.pragma PQ=4281167959.4271299633
+.pragma PQ=338871469111127928412308213206819656391.338531414912581056934822037249894061881
 .pragma io=ts incdir=../lib/
 
 
@@ -40,19 +40,22 @@ outer_loop:                 # for (int i = 0; i < size ; i++) {
         .mov21 arr1 x
         .mov21 arr2 y
 
-        .seq x y eq         #       int eq = (arr1[i] == arr2[j]) ? 1 : 0;
+        .mov ozero eq       #       int eq = (arr1[i] == arr2[j]) ? 1 : 0;
+        .ifneq x y endif
+            .mov oone eq
+        endif:
 
-        .smul x eq tmp
+        .omul x eq tmp
         .add12 tmp res      #       res[i] += eq * arr1[i];
         .add12 eq ex_ptr    #       ex_ptr[i] += eq
 
-        .smul X eq tmp
+        .omul X eq tmp
         .add12 tmp arr2     #       arr2[j] += eq * X;
         .add12 tmp arr1     #       arr1[i] += eq * X;
 
         .inc j
         .inc arr2
-    .ifneq j size inner_loop #  }
+    .ifneq j size inner_loop #   }
     .inc i
     .inc arr1
     .inc res
@@ -64,11 +67,11 @@ outer_loop:                 # for (int i = 0; i < size ; i++) {
 .mov ozero i
 compute_res_loop:           # for (int i = 0 ; i < size ; i++) 
     .mov21 ex_ptr ex        #   ex = *exist;
-    .mov _s1 nex
+    .mov _o1 nex
     ex nex;                 #   nex = 1 - ex
     .mov21 res tmp          #   res = ex*(*res) + nex*X
-    .smul ex tmp r1
-    .smul nex X r2
+    .omul ex tmp r1
+    .omul nex X r2
     .add r1 r2
     .mov12 r2 res
 
@@ -82,8 +85,7 @@ compute_res_loop:           # for (int i = 0 ; i < size ; i++)
 .mov ozero i
 loop:
     .mov21 res x
-    .outd x
-    #.outd x
+    .out x
     .inc res
     .inc i
 .ifneq i size loop
@@ -97,11 +99,11 @@ loop:
 . ex_ptr:exist ex_ptr_bu:exist
 . arr1:0 arr2:0 arr2_bu:0
 . i:0 j:0
-. size:0 x:~0 y:~0 tmp:~0 eq:~0
-. ex:~0 nex:~0 r1:~0 r2:~0
+. size:0 x:0 y:0 tmp:0 eq:0
+. ex:0 nex:0 r1:0 r2:0
 
 . ozero:0 oone:1
-. X:~65536
+. X:999
 
 # data
 header_start:
@@ -110,14 +112,14 @@ header_end:
 header_size: (header_end - header_start)
 
 db_start:
-.include datax "../setIntersection/db/32rand_N64_b16.db.sec"
+.include "../setIntersection/db/32rand"
 db_end:
 db_size: (db_end - db_start)
 
 .include "secure.lib"
 
-. result:~[200]
-. exist:~[200]
+. result:[200]
+. exist:[200]
 
 
 # int* intersect(int arr1[], int arr2[], int size) {
