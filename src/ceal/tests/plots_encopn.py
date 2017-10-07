@@ -17,7 +17,7 @@ else:
 mydpi = 300
 figname = benchmark+'.png'
 
-pltsize = (6.7, 2) 
+pltsize = (6.8, 2.1) 
 
 nbits = ['64-bit $\lambda$', '128-bit $\lambda$', '256-bit $\lambda$', '512-bit $\lambda$', '1024-bit $\lambda$']
 
@@ -102,15 +102,15 @@ elif benchmark == "psi":
 ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
-ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=8, ncol=5)
+ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=9, ncol=5, loc='upper center')
 
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
         if height > 10:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height), ha='center', va='bottom', fontsize=9)
         else:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=9)
 
 autolabel(rects1)
 autolabel(rects2)

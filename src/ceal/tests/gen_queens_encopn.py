@@ -52,16 +52,16 @@ ax.set_ylabel("time (sec.) x $10^4$")
 ax.set_xlabel("Security Parameter ($\lambda$) bits")
 ax.set_xticks(index + width / 2)
 ax.set_xticklabels(nbits)
-ax.legend((rects1[0], rects2[0]), ("$\\beta$ = 8", "$\\beta$ = 16"), fontsize=8, ncol=2, loc='upper left')
+ax.legend((rects1[0], rects2[0]), ("$\\beta$ = 8", "$\\beta$ = 16"), fontsize=9, ncol=2, loc='upper left')
 
 
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
         if height > 10:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=9)
         else:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.3f' % (height), ha='center', va='bottom', fontsize=8)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.3f' % (height), ha='center', va='bottom', fontsize=9)
 
 autolabel(rects1)
 autolabel(rects2)
