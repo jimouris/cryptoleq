@@ -11,7 +11,7 @@ benchmark = "nqueens"
 
 mydpi = 300
 figname = benchmark+'.png'
-pltsize = (6.2, 1.9) # default (8, 6)
+pltsize = (6.2, 1.95) # default (8, 6)
 nbits = [64, 128, 256, 512, 1024]
 
 data = {
@@ -59,9 +59,9 @@ def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
         if height > 10:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=9)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8.5)
         else:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.3f' % (height), ha='center', va='bottom', fontsize=9)
+            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.3f' % (height), ha='center', va='bottom', fontsize=8.5)
 
 autolabel(rects1)
 autolabel(rects2)
