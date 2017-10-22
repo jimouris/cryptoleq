@@ -1,0 +1,115 @@
+####################################
+## AND Bitwise Operator
+##########################################################################
+## AND (X, Y, Length)
+##########################################################################
+
+.pragma k=5 r=17 beta=32
+# .pragma PQ=63199.64567
+.pragma PQ=4281167959.4271299633
+.pragma io=ts incdir=../lib/
+
+.mov _o0 i
+
+# ROR(x, r) ((x >> r) | (x << (WORD_SIZE - r)))
+
+# SRL
+.mov r tmp
+.mov _o0 j
+.mov x sr_x             # sr_x = x
+_o0 tmp end_sr_loop;
+exp_loop1:               # for (j = 0; j < i; j++)
+    ._sd2 sr_x sr_x #     sr_x /= 2;
+    .add _o1 j
+.ifneq j r exp_loop1
+end_sr_loop:
+
+.outd sr_x
+
+# SLL
+.mov l tmp
+.mov _o0 j
+.mov x sl_x             # sl_x = x
+_o0 tmp end_sl_loop;
+exp_loop2:               # for (j = 0; j < i; j++)
+    .add sl_x sl_x #     sl_x *= 2;
+    .add _o1 j
+.ifneq j l exp_loop2
+end_sl_loop:
+
+.outd sl_x
+
+####### OR ########
+.mov _o0 i
+.mov _s0 x_or_y
+.mov sl_x x
+.mov sr_x y
+
+for_all_bits:
+    ## Compute LSB(x)
+    ._sd2 x x_half  # x_half = x / 2
+    .mov x lsb_x    # lsb_x = x - (x_half + x_half)
+    x_half lsb_x;
+    x_half lsb_x;
+
+    ## Compute LSB(y)
+    ._sd2 y y_half  # y_half = y / 2
+    .mov y lsb_y    # lsb_y = y - (y_half + y_half)
+    y_half lsb_y;
+    y_half lsb_y;
+
+    ## Compute LSB(x) OR LSB(y)
+    .add lsb_x lsb_y
+    ._G lsb_y _s1 lsb   # lsb = G(lsb_x + lsb_y, 1);
+
+    .mov i tmp
+    .mov _o0 j
+    .mov lsb exp_result             # exp_result = lsb
+    _o0 tmp end_exp_loop;
+    exp_loop:                       # for (j = 0; j < i; j++)
+        .add exp_result exp_result #     exp_result *= 2;
+        .add _o1 j
+    .ifneq j i exp_loop
+    end_exp_loop:
+
+    .add exp_result x_or_y
+
+    ## Continue with next bits
+    ._sd2 x x
+    ._sd2 y y 
+    
+    .add _o1 i      # i++
+.ifneq i WORD_SIZE for_all_bits
+.outd x_or_y
+
+
+.halt
+
+## and inputs, output
+. x:~5
+. r:8
+. l:24
+. rot:0
+. WORD_SIZE:32
+
+## and local variables
+. i:0 j:0
+. sr_x:0 sl_x:0 
+. tmp:0
+. exp:0 exp_result:1
+
+
+. x_or_y:~0
+
+## OR local variables
+. y:0
+. x_half:0 y_half:0 lsb_x:0 lsb_y:0 lsb:0
+
+
+## Constants
+. _o0:0
+. _s2:~2
+
+
+.include "secure.lib"
+
