@@ -1,0 +1,65 @@
+####################################
+## SPECK CIPHER
+##########################################################################
+## encrypt(uint32_t pt[2], uint32_t ct[2], uint32_t K[2])
+##########################################################################
+
+.pragma k=5 r=17 beta=16
+.pragma PQ=63199.64567
+.pragma io=ts incdir=../lib/
+
+####################### start of ROTATE RIGHT 8 POSITIONS #######################
+.mov _o0 j      # j = 0
+rotate_start:
+    ################### start of ROTATE RIGHT 1 POSITION ###################
+    ## Compute LSB(x)
+    ._sd2 x x_half  # x_half = x / 2
+    .mov x lsb    # lsb = x - (x_half + x_half)
+    x_half lsb;
+    x_half lsb;
+    .mov lsb y      # y = lsb
+    .mov _o1 i
+    for_all_bits:   # for (int i = 0 ; i < WORD_SIZE-1 ; i++)
+        .add y y        # y += y
+        .add _o1 i      # i++
+    .ifneq i WORD_SIZE for_all_bits
+    lsb x;          # x = x - lsb
+    ._sd2 x x       # x /= 2;
+    .add x y        # y += x
+    .outd y
+    ################### end of ROTATE RIGHT 1 POSITION ###################
+    .mov y x
+    .add _o1 j      # j++
+.ifneq j _o7 rotate_start
+.outd x
+####################### end of ROTATE RIGHT 8 POSITIONS #######################
+
+
+
+.halt
+
+###### SPECK INPUTS OUTPUTS ######
+. ROUNDS:22
+. pt0:~26956 pt1:~25972
+. ct0:~17138 ct1:~43112
+. buf0:0 buf1:0
+##################################
+
+# variables
+. x:~5 y:~0
+. ptr:db_start
+. i:0 j:0
+. x_half:0 lsb:0
+
+## Constants
+. WORD_SIZE:16
+. _o0:0 _o2:2 _o7:7
+
+
+db_start:
+.include datax "db.sec"
+db_end:
+db_size: (db_end - db_start)
+
+.include "secure.lib"
+
