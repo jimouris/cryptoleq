@@ -40,9 +40,9 @@ else_cond:
         .mov21 ptr1 x
         .mov21 ptr2 y
         .mov x t
-        .add _s0 t
+        .add _s0 t              # obfuscate the numbers
         .mov y x
-        .add _s0 x
+        .add _s0 x              # obfuscate the numbers
         .mov t y
         .mov12 x ptr1
         .mov12 y ptr2

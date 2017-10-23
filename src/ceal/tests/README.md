@@ -5,11 +5,6 @@
 * How the algorithm is converted to privacy preserving version (1 sentence) 
 -->
 
-- [x] __[Number Occurrences](https://github.com/jimouris/cryptoleq/tree/master/src/ceal/tests/numOccurrences)__ *(not for benchmarking)*
-    * Given an array of integers count the occurrences of a specific number.
-    * __Threat Model:__ The input number as well as the array of integers are given encrypted. No information leaked.
-
-
 - [x] __[Fibonacci](https://github.com/jimouris/cryptoleq/tree/master/src/ceal/tests/fibonacci)__ [wiki](https://en.wikipedia.org/wiki/Fibonacci_number)
     * The Fibonacci numbers are the numbers in a sequence that is characterized by the fact that every number after the first two is the sum of the two preceding ones.
     * __Threat Model:__ The input number is given encrypted, while we have modified the algorithm in a way to protect the input from information leaked from the computation time.
@@ -74,6 +69,12 @@ def tak( x, y, z)
     z
 end
 ```
+
+
+- [x] __[Number Occurrences](https://github.com/jimouris/cryptoleq/tree/master/src/ceal/tests/numOccurrences)__ *(not for benchmarking)*
+    * Given an array of integers count the occurrences of a specific number.
+    * __Threat Model:__ The input number as well as the array of integers are given encrypted. No information leaked.
+
 
 
 *Source: Wikipedia*
