@@ -18,6 +18,27 @@ void speck_encrypt(uint16_t const pt[static 2], uint16_t ct[static 2], uint16_t 
     }
 }
 
+void speck_encrypt_ll(uint16_t const pt[static 2], uint16_t ct[static 2], uint16_t const K[static ROUNDS]) {
+    uint16_t x = pt[0];
+    uint16_t y = pt[1];
+    printf("\n");
+    for (int i = 0; i < ROUNDS; i++) {
+        y = ROR(y, 7);
+        printf("%zu ", y);
+        y += x;
+        printf("%zu ", y);
+        y ^= K[i];
+        printf("%zu ", y);
+        x = ROR(x, 14);
+        printf("%zu ", x);
+        x ^= y;
+        printf("%zu ", x);
+    }
+    printf("\n\n");
+    ct[0] = x;
+    ct[1] = y;
+}
+
 void speck_decrypt(uint16_t const ct[static 2], uint16_t pt[static 2], uint16_t const K[static ROUNDS]) {
     pt[0] = ct[0];
     pt[1] = ct[1];
@@ -35,7 +56,7 @@ int main(void) {
 
     printf("Plain text: %zu %zu\n\n", plain_text[0], plain_text[1]);
     printf("================== SPECK ENCRYPTION ==================\n");
-    speck_encrypt(plain_text, buffer, exp);
+    speck_encrypt_ll(plain_text, buffer, exp);
     if (memcmp(buffer, cipher_text, sizeof(cipher_text))) {
         printf("encryption failed\n");
         return EXIT_FAILURE;
@@ -52,18 +73,4 @@ int main(void) {
 
     printf("Encryption and decryption success\n");
     return EXIT_SUCCESS;
-}
-
-void speck_encrypt_ll(uint16_t const pt[static 2], uint16_t ct[static 2], uint16_t const K[static ROUNDS]) {
-    uint16_t x = pt[0];
-    uint16_t y = pt[1];
-    for (int i = 0; i < ROUNDS; i++) {
-        y = ROR(y, 7);
-        y += x;
-        y ^= K[i];
-        x = ROL(x, 2);
-        x ^= y;
-    }
-    ct[0] = x;
-    ct[1] = y;
 }
