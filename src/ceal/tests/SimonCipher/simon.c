@@ -55,15 +55,23 @@ int main(void) {
 
     uint16_t exp[ROUNDS] = { 256, 2312, 4368, 6424, 29123, 46665, 22228, 57456, 61786, 50485, 56724, 16400, 9482, 28518, 59755, 19416, 4069, 31815, 57583, 15905, 1627, 17292, 62058, 46528, 34313, 40846, 55487, 2476, 59410, 10000, 11434, 36116};
 
-    printf("PTL: %" PRIu16 ", PTR: %" PRIu16 " \n", plain_text[0], plain_text[1]);
+    printf("Plain text: %" PRIu16 " %" PRIu16 "\n\n", plain_text[0], plain_text[1]);
+    printf("================== SIMON ENCRYPTION ==================\n");
     simon_encrypt_ll(plain_text, buffer, exp);
-    printf("CTL: %" PRIu16 ", CTR: %" PRIu16 " \n", buffer[0], buffer[1]);
-
+    printf("==> Cipher text: %" PRIu16 " %" PRIu16 "\n\n", buffer[0], buffer[1]);
     if (buffer[0] != cipher_text[0] || buffer[1] != cipher_text[1]) {
         printf("Encryption failed!\n");
         return EXIT_FAILURE;
     }
-    printf("Encryption ok!\n");
+
+    printf("================== SIMON DECRYPTION ==================\n");
+    simon_decrypt(cipher_text, buffer, exp);
+    if (buffer[0] != plain_text[0] || buffer[1] != plain_text[1]) {
+        printf("Decryption failed\n");
+        return EXIT_FAILURE;
+    }
+    printf("==> Plain text: %" PRIu16 " %" PRIu16 " (decrypted cipher text)\n\n", buffer[0], buffer[1]);
+    printf("Encryption and decryption success\n");
 
     return EXIT_SUCCESS;
 }
