@@ -190,7 +190,7 @@ for_all_rounds:
 
 
 db_start:
-.include datax "exp22_512.sec"
+.include datax "../SpeckCipher/exp22_512.sec"
 db_end:
 db_size: (db_end - db_start)
 
