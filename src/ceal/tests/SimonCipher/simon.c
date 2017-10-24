@@ -22,19 +22,23 @@ void simon_encrypt(uint16_t const pt[static 2], uint16_t ct[static 2], uint16_t 
 
 // Simon using ROR instead of ROL
 void simon_encrypt_ll(uint16_t const pt[static 2], uint16_t ct[static 2], uint16_t const K[static ROUNDS]) {
-    ct[0] = pt[0];
-    ct[1] = pt[1];
-    uint16_t ct0_tmp, tmp_1, tmp_3;
+    uint16_t x = pt[0];
+    uint16_t y = pt[1];
+    uint16_t tmp_x, tmp_ror;
     for (int i = 0; i < ROUNDS; ++i) {
-        ct0_tmp = ct[0];
-        tmp_1 = ROR(ct[0], 15);
-        tmp_3 = ROR(ct[0], 8);
-        tmp_1 &= tmp_3;
-        tmp_1 ^= ct[1];
-        tmp_1 ^= ROR(ct[0], 14);
-        ct[0] = tmp_1 ^ K[i];
-        ct[1] = ct0_tmp;
+        tmp_x = x;
+        x = ROR(tmp_x, 15);
+        tmp_ror = ROR(tmp_x, 8);
+        x &= tmp_ror;
+        x ^= y;
+        tmp_ror = ROR(tmp_x, 14);
+        x ^= tmp_ror;
+        x ^= K[i];
+        y = tmp_x;
+        printf("%" PRIu16 " %" PRIu16 " ", x, y);
     }
+    ct[0] = x;
+    ct[1] = y;
 }
 
 void simon_decrypt(uint16_t const ct[static 2], uint16_t pt[static 2], uint16_t const K[static ROUNDS]) {
