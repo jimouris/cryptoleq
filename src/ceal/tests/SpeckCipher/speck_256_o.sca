@@ -197,7 +197,7 @@ for_all_rounds:
 
 
 db_start:
-.include "exp22.opn"
+.include "../SpeckCipher/exp22.opn"
 db_end:
 db_size: (db_end - db_start)
 

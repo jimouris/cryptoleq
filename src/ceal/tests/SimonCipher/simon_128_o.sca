@@ -310,7 +310,7 @@ for_all_rounds:
 
 
 db_start:
-.include "exp32.opn"
+.include "../SimonCipher/exp32.opn"
 db_end:
 db_size: (db_end - db_start)
 
