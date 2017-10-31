@@ -316,7 +316,7 @@ for_all_bits6:
 . x:~0 y:~0
 . hash:~0 temp:~0
 . word_size:32
-. length:4
+. length:2
 . i:0 j:0 jen_i:0
 . sl_hash:0
 
@@ -341,7 +341,7 @@ header_end:
 header_size: (header_end - header_start)
 
 db_start:
-.include datax "../jenkins/abcd_256.sec"
+.include datax "../jenkins/abcd_N256.sec"
 db_end:
 db_size: (db_end - db_start)
 
