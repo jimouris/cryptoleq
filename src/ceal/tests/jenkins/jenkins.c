@@ -23,13 +23,9 @@ uint32_t jenkins_16b_ll(const uint16_t* key, size_t length) {
     hash += temp;
     temp = hash >> 11;
     hash ^= temp;
-    printf("after xor %" PRIu32 " %" PRIu32 "\n", hash, temp);
     temp = hash << 15;
-    printf(" %" PRIu32 "\n", temp);
     temp &= 0xffff;
-    printf(" %" PRIu32 "\n", temp);
     hash += temp;
-    printf(" %" PRIu32 "\n", hash);
     hash &= 0xffff;
     return hash;
 }
@@ -57,6 +53,3 @@ int main(void) {
 //     return hash;
 // }
 
-// 000011110100111100110000000000000000
-// 100011110100111100110000000000000000
-// 11110100111100110000000000000000
