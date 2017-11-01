@@ -337,12 +337,12 @@ for_all_bits6:
 
 # data
 header_start:
-.include "header.opn"
+.include "../jenkins/header.opn"
 header_end:
 header_size: (header_end - header_start)
 
 db_start:
-.include "abcd.opn"
+.include "../jenkins/abcd.opn"
 db_end:
 db_size: (db_end - db_start)
 
