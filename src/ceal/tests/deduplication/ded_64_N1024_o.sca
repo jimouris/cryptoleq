@@ -1,0 +1,76 @@
+####################################
+## Array_i Deduplication: Keep unique occurrences of each object
+##########################################################################
+## For every element in the array_i, check every element after it. 
+## Replace all duplicates with epsilon
+##########################################################################
+
+
+.pragma k=5 r=17 beta=16
+.pragma PQ=13392849694255970315601419090152597688339809774933571293865724091737666496951381207429127235940384883608845778583380210687006370486238723021460371010217257.13403952390292880134486926689236901739298695038033079040680862117777593853851234125818128702776151240584166261477766002390185782669746209391687589482784501
+.pragma io=ts incdir=../lib/
+
+
+.mov21 header_ptr size
+
+.mov _o0 i
+outer_loop:                 # for (int i = 0; i < size ; i++) {
+    .mov _o1 j
+    .add i j                # j = i + 1
+    .mov array_i array_j
+    .inc array_j
+    inner_loop:             #   for (int j = i+1 ; j < size ; j++) {
+        .mov21 array_i x
+        .mov21 array_j y
+
+        # if (array[i] == array[j]) { array[j] = epsilon; }
+        .ifneq x y endif
+            .mov12 epsilon array_j
+        endif:
+
+        .inc j
+        .inc array_j
+        .mov j tmp
+        .add _o1 tmp
+    size tmp inner_loop     # } if (j - size <= 0) goto inner_loop
+
+    .inc i
+    .inc array_i
+.ifneq i size outer_loop    # }
+
+# Print the results
+.mov ptr array_i
+.mov _o0 i
+loop:
+    .mov21 array_i x
+    .out x
+    .inc array_i
+    .inc i
+.ifneq i size loop
+
+.halt
+
+# variables
+. header_ptr:header_start
+. ptr:db_start
+
+. array_i:db_start array_j:db_start
+. i:0 j:0
+. size:0 x:0 y:0 
+. tmp:0 tmp2:0 eq:0 neq:0
+
+. _o0:0
+. epsilon:999
+
+# data
+header_start:
+.include "../deduplication/db/h64.opn"
+header_end:
+header_size: (header_end - header_start)
+
+db_start:
+.include "../deduplication/db/64rand"
+db_end:
+db_size: (db_end - db_start)
+
+.include "secure.lib"
