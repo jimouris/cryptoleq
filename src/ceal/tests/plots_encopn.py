@@ -6,18 +6,21 @@ import sys
 import string
 
 if len(sys.argv) != 2:
-    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi]"
+    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup]"
     sys.exit(1)
-if sys.argv[1] == "tak" or sys.argv[1] == "isort" or sys.argv[1] == "psi":
+if sys.argv[1] == "tak" or sys.argv[1] == "isort" or sys.argv[1] == "psi" or sys.argv[1] == "sieve" or sys.argv[1] == "dedup":
     benchmark = sys.argv[1]
 else:
-    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi]"
+    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup]"
     sys.exit(1)
 
 mydpi = 300
 figname = benchmark+'.png'
 
-pltsize = (6.8, 2.1) 
+if benchmark == "sieve" or benchmark == "dedup":
+    pltsize = (7.5, 2.2) 
+else:
+    pltsize = (6.8, 2.1) 
 
 nbits = ['64-bit $\lambda$', '128-bit $\lambda$', '256-bit $\lambda$', '512-bit $\lambda$', '1024-bit $\lambda$']
 
@@ -30,24 +33,36 @@ data = {
     'isortopn' :  { '64' : [0.3, 0.48, 1.35], '128' : [0.55, 0.8, 1.78], '256' : [1.03, 1.37, 2.17], '512' : [2.66, 2.86, 4.03],  '1024' : [8.08, 8.87, 9.71] },
     
     'psi' :  { '64' : [249.25, 968.8, 3845.82], '128' : [379.71, 1462.32, 5786.62], '256' : [828.24, 3127.55, 12225.06], '512' : [2479.54, 9191.15, 36009.76],  '1024' : [7133.17, 27015.24, 108343.76] },
-    'psiopn' :  { '64' : [0.58, 0.81, 1.98], '128' : [0.91, 1.12, 2.31], '256' : [1.51, 1.66, 2.98], '512' : [3.04, 3.1, 5.21],  '1024' : [7.98, 9.23, 12.68] }
+    'psiopn' :  { '64' : [0.58, 0.81, 1.98], '128' : [0.91, 1.12, 2.31], '256' : [1.51, 1.66, 2.98], '512' : [3.04, 3.1, 5.21],  '1024' : [7.98, 9.23, 12.68] },
+
+    'sieve' :  { '64' : [80.57, 157.46, 317.46], '128' : [190.43, 366.87, 729.19], '256' : [433.87, 816.97, 1598.71], '512' : [1397.44, 2468.49, 4618.86],  '1024' : [4388.98, 7789.04, 14060.56] },
+    'sieveopn' :  { '64' : [0.66, 1.25, 2.86], '128' : [1.02, 1.68, 3.53], '256' : [1.36, 2.13, 4.13], '512' : [3.53, 4.39, 6.76],  '1024' : [7.81, 8.99, 12.31] },
+
+    'dedup' :  { '64' : [74.5, 313.2, 1270.59], '128' : [218.7, 909.08, 3717.63], '256' : [370.32, 1569.9, 6255.3], '512' : [1125.22, 4627.48, 18712.79],  '1024' : [3414.63, 13759.32, 56539.16] },
+    'dedupopn' :  { '64' : [0.21, 0.26, 0.31], '128' : [0.41, 0.49, 0.63], '256' : [0.98, 1.13, 0.94], '512' : [2.67, 2.76, 2.54],  '1024' : [7.01, 7.12, 7.41] }
 }
 
 for key, value in data[benchmark].items():
     for i in range(len(value)):
         if benchmark == "tak" or benchmark == "isort" or benchmark == "psi":
             value[i] /= 10000
+        elif benchmark == "sieve" or benchmark == "dedup":
+            value[i] /= 1000
     data[benchmark][key] = value
 for key, value in data[benchmark+"opn"].items():
     for i in range(len(value)):
         if benchmark == "tak" or benchmark == "isort" or benchmark == "psi":
             value[i] /= 10000
+        elif benchmark == "sieve" or benchmark == "dedup":
+            value[i] /= 1000
     data[benchmark+"opn"][key] = value
 
 x_axis_labels = {
     'tak' : ("Inputs ($x, y, z$) range", ['[0-3]', '[0-4]', '[0-5]']),
     'isort' : ("Number of Array Elements ($N$)", [32, 64, 128]),
     'psi' : ("Number of Elements in each Set ($N \cap N$)", ["$16 \cap 16$", "$32 \cap 32$", "$64 \cap 64$"]),
+    'sieve' : ("Maximum number to compute", [256, 512, 1024]),
+    'dedup' : ("Number of Array Elements", [16, 32, 64]),
 }
 
 data64 = data[benchmark]['64']
@@ -99,6 +114,12 @@ elif benchmark == "isort":
 elif benchmark == "psi":
     ax.set_ylim([0.00001, 10000])
     ax.set_ylabel("time (sec.) x $10^4$")
+elif benchmark == "sieve":
+    ax.set_ylim([0.0001, 10000])
+    ax.set_ylabel("time (sec.) x $10^3$")
+elif benchmark == "dedup":
+    ax.set_ylim([0.0001, 10000])
+    ax.set_ylabel("time (sec.) x $10^3$")
 ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
