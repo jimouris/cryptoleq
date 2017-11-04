@@ -1,0 +1,44 @@
+# PIR example
+
+.pragma k=5 r=17 beta=16
+.pragma PQ=18299379327617480707.18345258783657292909
+.pragma io=ts incdir=../lib/
+
+.mov    szero   sum
+
+start:
+    .mov21  p key
+    .inc    p
+    .mov21  p val
+    .inc    p
+    .dec    db_size
+    .dec    db_size
+
+    .seq    key input x
+    .smul   x val y
+    .add    y sum
+
+    # .out    sum #
+
+.ifneq  db_size ozero start
+
+.out    sum
+.outd   sum #
+
+.halt
+
+. sum:0 key:0 val:0 p:db_start x:0 y:0
+
+# data
+db_start:
+.include datax "../PIR/db/64rand_N128_b16.db.sec"
+db_end:
+
+input:~57079
+
+db_size: (db_end - db_start)
+
+# constants
+. ozero:0 szero:~0
+
+.include "secure.lib"
