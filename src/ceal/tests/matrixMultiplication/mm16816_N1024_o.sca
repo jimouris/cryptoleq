@@ -5,7 +5,7 @@
 ##########################################################################
 
 
-.pragma k=5 r=17 beta=16
+.pragma k=5 r=17 beta=8
 .pragma PQ=13392849694255970315601419090152597688339809774933571293865724091737666496951381207429127235940384883608845778583380210687006370486238723021460371010217257.13403952390292880134486926689236901739298695038033079040680862117777593853851234125818128702776151240584166261477766002390185782669746209391687589482784501
 .pragma io=ts incdir=../lib/
 
@@ -49,7 +49,7 @@ outer:
             # B[k*c2 + j]
             .mov21 ptrB y
             # xy = A[i*c1 + k] * B[k*c2 + j]
-            .smul x y xy
+            .omul x y xy
             # res[i*c2 + j] += xy
             .add12 xy res
 
@@ -79,7 +79,6 @@ outer:
 loop:
     .mov21 res xy
     .out xy
-    # .outd xy
     .inc res
     .inc i
 .ifneq i iterations loop
@@ -94,23 +93,23 @@ loop:
 . r1:0 r2:0 c1:0 c2:0 
 . i:0 j:0 k:0 iterations:0
 . ptrA:0 ptrAbu:0 ptrB:0 ptrBbu:0
-. x:~0 y:~0 xy:~0
-. ozero:0 szero:~0
+. x:0 y:0 xy:0 tmp:0
+. ozero:0
 
 # data
 header_start:
-.include "../matrixMultiplication/db/h12x8x12_b16.opn"
+.include "../matrixMultiplication/db/h16x8x16.opn"
 header_end:
 header_size: (header_end - header_start)
 
 db_start:
-.include datax "../matrixMultiplication/db/db12x8x12_N64_b16.sec"
+.include "../matrixMultiplication/db/db16x8x16" # 2 3 3 4   1 2 3  4 5 6   1 2 3 4  4 4 3 2  9 7 6 4
 db_end:
 db_size: (db_end - db_start)
 
 .include "secure.lib"
 
-. result:~[1024]
+. result:[1024]
 
 
 # int r1, c1, r2, c2, i, j, k;
