@@ -6,18 +6,18 @@ import sys
 import string
 
 if len(sys.argv) != 2:
-    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup|pir]"
+    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup|pir|mmult]"
     sys.exit(1)
-if sys.argv[1] == "tak" or sys.argv[1] == "isort" or sys.argv[1] == "psi" or sys.argv[1] == "sieve" or sys.argv[1] == "dedup" or sys.argv[1] == "pir":
+if sys.argv[1] == "tak" or sys.argv[1] == "isort" or sys.argv[1] == "psi" or sys.argv[1] == "sieve" or sys.argv[1] == "dedup" or sys.argv[1] == "pir" or sys.argv[1] == "mmult":
     benchmark = sys.argv[1]
 else:
-    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup|pir]"
+    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup|pir|mmult]"
     sys.exit(1)
 
 mydpi = 300
 figname = benchmark+'.png'
 
-if benchmark == "sieve" or benchmark == "dedup" or benchmark == "pir":
+if benchmark == "sieve" or benchmark == "dedup" or benchmark == "pir" or benchmark == "mmult":
     pltsize = (7.5, 2.2) 
 else:
     pltsize = (6.8, 2.1) 
@@ -42,14 +42,17 @@ data = {
     'dedupopn' :  { '64' : [0.21, 0.26, 0.31], '128' : [0.41, 0.49, 0.63], '256' : [0.98, 1.13, 0.94], '512' : [2.67, 2.76, 2.54],  '1024' : [7.01, 7.12, 7.41] },
 
     'pir' :  { '64' : [5.32, 10.15, 20.12], '128' : [15.65, 29.69, 57.75], '256' : [30.22, 53.72, 101.16], '512' : [90.23, 164.62, 333.57],  '1024' : [250.91, 488.94, 927.02] },
-    'piropn' :  { '64' : [0.21, 0.17, 0.23], '128' : [0.43, 0.38, 0.39], '256' : [0.89, 0.87, 0.94], '512' : [2.37, 2.61, 2.66],  '1024' : [6.89, 7.62, 7.39] }
+    'piropn' :  { '64' : [0.21, 0.17, 0.23], '128' : [0.43, 0.38, 0.39], '256' : [0.89, 0.87, 0.94], '512' : [2.37, 2.61, 2.66],  '1024' : [6.89, 7.62, 7.39] },
+
+    'mmult' :  { '64' : [45.22, 125.24, 216.41], '128' : [106.13, 322.82, 568.54], '256' : [255.38, 642.45, 1540.36], '512' : [700.67, 2962.81, 5138.3],  '1024' : [2267.09, 11030.12, 19218.85] },
+    'mmultopn' :  { '64' : [7.86, 18.02, 33.12], '128' : [9.05, 20.22, 37.44], '256' : [10.44, 23.42, 42.02], '512' : [13.56, 29.52, 53.23],  '1024' : [22.83, 46.41, 77.25] }
 }
 
 for key, value in data[benchmark].items():
     for i in range(len(value)):
         if benchmark == "tak" or benchmark == "isort" or benchmark == "psi":
             value[i] /= 10000
-        elif benchmark == "sieve" or benchmark == "dedup":
+        elif benchmark == "sieve" or benchmark == "dedup" or benchmark == "mmult":
             value[i] /= 1000
         elif benchmark == "pir":
             value[i] /= 100
@@ -58,7 +61,7 @@ for key, value in data[benchmark+"opn"].items():
     for i in range(len(value)):
         if benchmark == "tak" or benchmark == "isort" or benchmark == "psi":
             value[i] /= 10000
-        elif benchmark == "sieve" or benchmark == "dedup":
+        elif benchmark == "sieve" or benchmark == "dedup" or benchmark == "mmult":
             value[i] /= 1000
         elif benchmark == "pir":
             value[i] /= 100
@@ -71,6 +74,7 @@ x_axis_labels = {
     'sieve' : ("Maximum number to compute", [256, 512, 1024]),
     'dedup' : ("Number of Array Elements", [16, 32, 64]),
     'pir' : ("Number of Key-Value pairs", [16, 32, 64]),
+    'mmult' : ("Matrices Size", ['$[8 \\times 8] \\times [8 \\times 8]$', '$[12 \\times 8] \\times [8 \\times 12]$', '$[16 \\times 8] \\times [8 \\times 16]$'])
 }
 
 data64 = data[benchmark]['64']
@@ -131,6 +135,9 @@ elif benchmark == "dedup":
 elif benchmark == "pir":
     ax.set_ylim([0.001, 1000])
     ax.set_ylabel("time (sec.) x $10^2$")
+elif benchmark == "mmult":
+    ax.set_ylim([0.001, 1000])
+    ax.set_ylabel("time (sec.) x $10^3$")
 ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
@@ -150,7 +157,7 @@ autolabel(rects3)
 autolabel(rects4)
 autolabel(rects5)
 
-# plt.show()
+plt.show()
 
-plt.tight_layout()
-plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
+# plt.tight_layout()
+# plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
