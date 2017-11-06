@@ -6,18 +6,18 @@ import sys
 import string
 
 if len(sys.argv) != 2:
-    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup]"
+    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup|pir]"
     sys.exit(1)
-if sys.argv[1] == "tak" or sys.argv[1] == "isort" or sys.argv[1] == "psi" or sys.argv[1] == "sieve" or sys.argv[1] == "dedup":
+if sys.argv[1] == "tak" or sys.argv[1] == "isort" or sys.argv[1] == "psi" or sys.argv[1] == "sieve" or sys.argv[1] == "dedup" or sys.argv[1] == "pir":
     benchmark = sys.argv[1]
 else:
-    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup]"
+    print "Usage:\t python " + sys.argv[0] + " [tak|isort|psi|sieve|dedup|pir]"
     sys.exit(1)
 
 mydpi = 300
 figname = benchmark+'.png'
 
-if benchmark == "sieve" or benchmark == "dedup":
+if benchmark == "sieve" or benchmark == "dedup" or benchmark == "pir":
     pltsize = (7.5, 2.2) 
 else:
     pltsize = (6.8, 2.1) 
@@ -39,7 +39,10 @@ data = {
     'sieveopn' :  { '64' : [0.66, 1.25, 2.86], '128' : [1.02, 1.68, 3.53], '256' : [1.36, 2.13, 4.13], '512' : [3.53, 4.39, 6.76],  '1024' : [7.81, 8.99, 12.31] },
 
     'dedup' :  { '64' : [74.5, 313.2, 1270.59], '128' : [218.7, 909.08, 3717.63], '256' : [370.32, 1569.9, 6255.3], '512' : [1125.22, 4627.48, 18712.79],  '1024' : [3414.63, 13759.32, 56539.16] },
-    'dedupopn' :  { '64' : [0.21, 0.26, 0.31], '128' : [0.41, 0.49, 0.63], '256' : [0.98, 1.13, 0.94], '512' : [2.67, 2.76, 2.54],  '1024' : [7.01, 7.12, 7.41] }
+    'dedupopn' :  { '64' : [0.21, 0.26, 0.31], '128' : [0.41, 0.49, 0.63], '256' : [0.98, 1.13, 0.94], '512' : [2.67, 2.76, 2.54],  '1024' : [7.01, 7.12, 7.41] },
+
+    'pir' :  { '64' : [5.32, 10.15, 20.12], '128' : [15.65, 29.69, 57.75], '256' : [30.22, 53.72, 101.16], '512' : [90.23, 164.62, 333.57],  '1024' : [250.91, 488.94, 927.02] },
+    'piropn' :  { '64' : [0.21, 0.17, 0.23], '128' : [0.43, 0.38, 0.39], '256' : [0.89, 0.87, 0.94], '512' : [2.37, 2.61, 2.66],  '1024' : [6.89, 7.62, 7.39] }
 }
 
 for key, value in data[benchmark].items():
@@ -48,6 +51,8 @@ for key, value in data[benchmark].items():
             value[i] /= 10000
         elif benchmark == "sieve" or benchmark == "dedup":
             value[i] /= 1000
+        elif benchmark == "pir":
+            value[i] /= 100
     data[benchmark][key] = value
 for key, value in data[benchmark+"opn"].items():
     for i in range(len(value)):
@@ -55,6 +60,8 @@ for key, value in data[benchmark+"opn"].items():
             value[i] /= 10000
         elif benchmark == "sieve" or benchmark == "dedup":
             value[i] /= 1000
+        elif benchmark == "pir":
+            value[i] /= 100
     data[benchmark+"opn"][key] = value
 
 x_axis_labels = {
@@ -63,6 +70,7 @@ x_axis_labels = {
     'psi' : ("Number of Elements in each Set ($N \cap N$)", ["$16 \cap 16$", "$32 \cap 32$", "$64 \cap 64$"]),
     'sieve' : ("Maximum number to compute", [256, 512, 1024]),
     'dedup' : ("Number of Array Elements", [16, 32, 64]),
+    'pir' : ("Number of Key-Value pairs", [16, 32, 64]),
 }
 
 data64 = data[benchmark]['64']
@@ -120,6 +128,9 @@ elif benchmark == "sieve":
 elif benchmark == "dedup":
     ax.set_ylim([0.0001, 10000])
     ax.set_ylabel("time (sec.) x $10^3$")
+elif benchmark == "pir":
+    ax.set_ylim([0.001, 1000])
+    ax.set_ylabel("time (sec.) x $10^2$")
 ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
