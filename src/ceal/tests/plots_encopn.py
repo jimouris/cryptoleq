@@ -157,7 +157,7 @@ autolabel(rects3)
 autolabel(rects4)
 autolabel(rects5)
 
-plt.show()
+# plt.show()
 
-# plt.tight_layout()
-# plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
+plt.tight_layout()
+plt.savefig("./charts/"+figname,dpi=mydpi, bbox_inches="tight", pad_inches=0.03)
