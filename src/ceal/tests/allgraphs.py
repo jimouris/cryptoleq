@@ -43,11 +43,11 @@ width = 0.42       # the width of the bars
 
 fig, ax = plt.subplots(figsize=pltsize)
 ax.margins(0.04, 0.04) 
-rects1 = ax.bar(index, all512, width, color='xkcd:ecru', hatch='xxx', edgecolor='black', linewidth=1)
-rects2 = ax.bar(index + width, all1024, width, color='xkcd:light peach', hatch='...', edgecolor='black', linewidth=1)
+rects1 = ax.bar(index, all512, width, color='xkcd:light pink', hatch='xxx', edgecolor='black', linewidth=1)
+rects2 = ax.bar(index + width, all1024, width, color='xkcd:very light blue', hatch='...', edgecolor='black', linewidth=1)
 
-rects1opn = ax.bar(index, all512opn, width, color='xkcd:ecru', edgecolor='black', linewidth=1)
-rects2opn = ax.bar(index + width, all1024opn, width, color='xkcd:light peach', edgecolor='black', linewidth=1)
+rects1opn = ax.bar(index, all512opn, width, color='xkcd:light pink', edgecolor='black', linewidth=1)
+rects2opn = ax.bar(index + width, all1024opn, width, color='xkcd:very light blue', edgecolor='black', linewidth=1)
 
 ax.set_yscale('log')
 ax.set_ylim([0.01, 10000])
@@ -61,10 +61,12 @@ ax.legend((rects1[0], rects2[0]), ("512 $\lambda$ bits", "1024 $\lambda$ bits"),
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
-        if height > 10:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.1f' % (height), ha='center', va='bottom', fontsize=8.5)
+        if height > 1000:
+            ax.text(rect.get_x() + rect.get_width()/2.2, 1.1*height, '%2.1f' % (height), ha='center', va='bottom', fontsize=8.5)
+        elif height > 100:
+            ax.text(rect.get_x() + rect.get_width()/2.2, 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8.5)
         else:
-            ax.text(rect.get_x() + rect.get_width()/2., 1.1*height, '%2.2f' % (height), ha='center', va='bottom', fontsize=8.5)
+            ax.text(rect.get_x() + rect.get_width()/2.3, 1.1*height, '%2.3f' % (height), ha='center', va='bottom', fontsize=8.5)
 
 autolabel(rects1)
 autolabel(rects2)
