@@ -11,7 +11,8 @@ benchmark = "jenkins"
 
 mydpi = 300
 figname = benchmark+'.png'
-pltsize = (5.5, 2) # default (8, 6)
+pltsize = (6.2, 1.96) # default (8, 6)
+# pltsize = (5.5, 2) # default (8, 6)
 nbits = [64, 128, 256, 512, 1024]
 
 data = {

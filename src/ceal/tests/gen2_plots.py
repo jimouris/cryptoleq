@@ -28,7 +28,9 @@ elif benchmark == "psi":
 elif benchmark == "mmult":
     pltsize = (6, 2.2) # default (8, 6)
 elif benchmark == "perm":
-    pltsize = (6.7, 2.2) # default (8, 6)
+    # pltsize = (6.7, 2.2) # default (8, 6)
+    pltsize = (7.5, 2.2) 
+
 elif benchmark == "dedup":
     pltsize = (6, 2.5) # default (8, 6)
 
@@ -121,7 +123,7 @@ ax.set_xticks(index)
 ax.set_xlabel(x_axis_labels[benchmark][0])
 ax.set_xticklabels(x_axis_labels[benchmark][1])
 if benchmark == "perm":
-    ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=8, ncol=5)
+    ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=9, ncol=5, loc='upper center')
 else:
     ax.legend((rects1[0], rects2[0], rects3[0], rects4[0], rects5[0]), nbits, fontsize=8)
 
